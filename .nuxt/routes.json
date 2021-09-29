@@ -3,7 +3,8 @@
     "name": "Category___en",
     "path": "/Category",
     "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\Category.vue",
-    "chunkName": "pages/Category"
+    "chunkName": "pages/Category",
+    "_name": "_645e80cd"
   },
   {
     "name": "checkout___en",
@@ -13,24 +14,29 @@
       {
         "path": "billing",
         "name": "billing___en",
-        "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Checkout\\Billing.vue"
+        "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Checkout\\Billing.vue",
+        "_name": "_79323352"
       },
       {
         "path": "payment",
         "name": "payment___en",
-        "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Checkout\\Payment.vue"
+        "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Checkout\\Payment.vue",
+        "_name": "_17e1855d"
       },
       {
         "path": "shipping",
         "name": "shipping___en",
-        "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Checkout\\Shipping.vue"
+        "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Checkout\\Shipping.vue",
+        "_name": "_26632532"
       },
       {
         "path": "thank-you",
         "name": "thank-you___en",
-        "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Checkout\\ThankYou.vue"
+        "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Checkout\\ThankYou.vue",
+        "_name": "_53478de4"
       }
-    ]
+    ],
+    "_name": "_b3f8c95a"
   },
   {
     "name": "Checkout___en",
@@ -42,44 +48,52 @@
         "name": "Checkout-Billing___en",
         "path": "Billing",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\Checkout\\\\Billing.vue",
-        "chunkName": "pages/Checkout/Billing"
+        "chunkName": "pages/Checkout/Billing",
+        "_name": "_9c65e3d4"
       },
       {
         "name": "Checkout-Payment___en",
         "path": "Payment",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\Checkout\\\\Payment.vue",
-        "chunkName": "pages/Checkout/Payment"
+        "chunkName": "pages/Checkout/Payment",
+        "_name": "_507c6021"
       },
       {
         "name": "Checkout-Shipping___en",
         "path": "Shipping",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\Checkout\\\\Shipping.vue",
-        "chunkName": "pages/Checkout/Shipping"
+        "chunkName": "pages/Checkout/Shipping",
+        "_name": "_70e229ba"
       },
       {
         "name": "Checkout-ThankYou___en",
         "path": "ThankYou",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\Checkout\\\\ThankYou.vue",
-        "chunkName": "pages/Checkout/ThankYou"
+        "chunkName": "pages/Checkout/ThankYou",
+        "_name": "_9dc6926c"
       }
-    ]
+    ],
+    "_name": "_bbb4a5d6"
   },
   {
     "name": "ContactUs___en",
     "path": "/ContactUs",
     "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\ContactUs.vue",
-    "chunkName": "pages/ContactUs"
+    "chunkName": "pages/ContactUs",
+    "_name": "_3dfb011f"
   },
   {
     "name": "home___de",
     "path": "/de",
-    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Home.vue"
+    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Home.vue",
+    "_name": "_287550ec"
   },
   {
     "name": "Home___en",
     "path": "/Home",
     "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\Home.vue",
-    "chunkName": "pages/Home"
+    "chunkName": "pages/Home",
+    "_name": "_1b4ad8a4"
   },
   {
     "name": "MyAccount___en",
@@ -91,68 +105,87 @@
         "name": "MyAccount-AdressBook___en",
         "path": "AdressBook",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\MyAccount\\\\AdressBook.vue",
-        "chunkName": "pages/MyAccount/AdressBook"
+        "chunkName": "pages/MyAccount/AdressBook",
+        "_name": "_66c87f41"
       },
       {
         "name": "MyAccount-BillingDetails___en",
         "path": "BillingDetails",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\MyAccount\\\\BillingDetails.vue",
-        "chunkName": "pages/MyAccount/BillingDetails"
+        "chunkName": "pages/MyAccount/BillingDetails",
+        "_name": "_f488e9ee"
       },
       {
         "name": "MyAccount-LoyaltyCard___en",
         "path": "LoyaltyCard",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\MyAccount\\\\LoyaltyCard.vue",
-        "chunkName": "pages/MyAccount/LoyaltyCard"
+        "chunkName": "pages/MyAccount/LoyaltyCard",
+        "_name": "_7646dba4"
       },
       {
         "name": "MyAccount-MyNewsletter___en",
         "path": "MyNewsletter",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\MyAccount\\\\MyNewsletter.vue",
-        "chunkName": "pages/MyAccount/MyNewsletter"
+        "chunkName": "pages/MyAccount/MyNewsletter",
+        "_name": "_a31b2272"
       },
       {
         "name": "MyAccount-MyProfile___en",
         "path": "MyProfile",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\MyAccount\\\\MyProfile.vue",
-        "chunkName": "pages/MyAccount/MyProfile"
+        "chunkName": "pages/MyAccount/MyProfile",
+        "_name": "_c84810ea"
       },
       {
         "name": "MyAccount-MyReviews___en",
         "path": "MyReviews",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\MyAccount\\\\MyReviews.vue",
-        "chunkName": "pages/MyAccount/MyReviews"
+        "chunkName": "pages/MyAccount/MyReviews",
+        "_name": "_39424e06"
       },
       {
         "name": "MyAccount-OrderHistory___en",
         "path": "OrderHistory",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\MyAccount\\\\OrderHistory.vue",
-        "chunkName": "pages/MyAccount/OrderHistory"
+        "chunkName": "pages/MyAccount/OrderHistory",
+        "_name": "_ec90dfb0"
       },
       {
         "name": "MyAccount-ShippingDetails___en",
         "path": "ShippingDetails",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\MyAccount\\\\ShippingDetails.vue",
-        "chunkName": "pages/MyAccount/ShippingDetails"
+        "chunkName": "pages/MyAccount/ShippingDetails",
+        "_name": "_3cdd843c"
       }
-    ]
+    ],
+    "_name": "_44ab88bc"
   },
   {
     "name": "Product___en",
     "path": "/Product",
     "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\Product.vue",
-    "chunkName": "pages/Product"
+    "chunkName": "pages/Product",
+    "_name": "_6b0b6620"
   },
   {
     "name": "reset-password___en",
     "path": "/reset-password",
-    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\ResetPassword.vue"
+    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\ResetPassword.vue",
+    "_name": "_e372a566"
+  },
+  {
+    "name": "ResetPassword___en",
+    "path": "/ResetPassword",
+    "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\ResetPassword.vue",
+    "chunkName": "pages/ResetPassword",
+    "_name": "_24d364cb"
   },
   {
     "name": "Category___de",
     "path": "/de/Category",
     "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\Category.vue",
-    "chunkName": "pages/Category"
+    "chunkName": "pages/Category",
+    "_name": "_645e80cd"
   },
   {
     "name": "checkout___de",
@@ -162,24 +195,29 @@
       {
         "path": "billing",
         "name": "billing___de",
-        "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Checkout\\Billing.vue"
+        "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Checkout\\Billing.vue",
+        "_name": "_79323352"
       },
       {
         "path": "payment",
         "name": "payment___de",
-        "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Checkout\\Payment.vue"
+        "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Checkout\\Payment.vue",
+        "_name": "_17e1855d"
       },
       {
         "path": "shipping",
         "name": "shipping___de",
-        "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Checkout\\Shipping.vue"
+        "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Checkout\\Shipping.vue",
+        "_name": "_26632532"
       },
       {
         "path": "thank-you",
         "name": "thank-you___de",
-        "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Checkout\\ThankYou.vue"
+        "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Checkout\\ThankYou.vue",
+        "_name": "_53478de4"
       }
-    ]
+    ],
+    "_name": "_b3f8c95a"
   },
   {
     "name": "Checkout___de",
@@ -191,39 +229,46 @@
         "name": "Checkout-Billing___de",
         "path": "Billing",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\Checkout\\\\Billing.vue",
-        "chunkName": "pages/Checkout/Billing"
+        "chunkName": "pages/Checkout/Billing",
+        "_name": "_9c65e3d4"
       },
       {
         "name": "Checkout-Payment___de",
         "path": "Payment",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\Checkout\\\\Payment.vue",
-        "chunkName": "pages/Checkout/Payment"
+        "chunkName": "pages/Checkout/Payment",
+        "_name": "_507c6021"
       },
       {
         "name": "Checkout-Shipping___de",
         "path": "Shipping",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\Checkout\\\\Shipping.vue",
-        "chunkName": "pages/Checkout/Shipping"
+        "chunkName": "pages/Checkout/Shipping",
+        "_name": "_70e229ba"
       },
       {
         "name": "Checkout-ThankYou___de",
         "path": "ThankYou",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\Checkout\\\\ThankYou.vue",
-        "chunkName": "pages/Checkout/ThankYou"
+        "chunkName": "pages/Checkout/ThankYou",
+        "_name": "_9dc6926c"
       }
-    ]
+    ],
+    "_name": "_bbb4a5d6"
   },
   {
     "name": "ContactUs___de",
     "path": "/de/ContactUs",
     "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\ContactUs.vue",
-    "chunkName": "pages/ContactUs"
+    "chunkName": "pages/ContactUs",
+    "_name": "_3dfb011f"
   },
   {
     "name": "Home___de",
     "path": "/de/Home",
     "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\Home.vue",
-    "chunkName": "pages/Home"
+    "chunkName": "pages/Home",
+    "_name": "_1b4ad8a4"
   },
   {
     "name": "MyAccount___de",
@@ -235,96 +280,121 @@
         "name": "MyAccount-AdressBook___de",
         "path": "AdressBook",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\MyAccount\\\\AdressBook.vue",
-        "chunkName": "pages/MyAccount/AdressBook"
+        "chunkName": "pages/MyAccount/AdressBook",
+        "_name": "_66c87f41"
       },
       {
         "name": "MyAccount-BillingDetails___de",
         "path": "BillingDetails",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\MyAccount\\\\BillingDetails.vue",
-        "chunkName": "pages/MyAccount/BillingDetails"
+        "chunkName": "pages/MyAccount/BillingDetails",
+        "_name": "_f488e9ee"
       },
       {
         "name": "MyAccount-LoyaltyCard___de",
         "path": "LoyaltyCard",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\MyAccount\\\\LoyaltyCard.vue",
-        "chunkName": "pages/MyAccount/LoyaltyCard"
+        "chunkName": "pages/MyAccount/LoyaltyCard",
+        "_name": "_7646dba4"
       },
       {
         "name": "MyAccount-MyNewsletter___de",
         "path": "MyNewsletter",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\MyAccount\\\\MyNewsletter.vue",
-        "chunkName": "pages/MyAccount/MyNewsletter"
+        "chunkName": "pages/MyAccount/MyNewsletter",
+        "_name": "_a31b2272"
       },
       {
         "name": "MyAccount-MyProfile___de",
         "path": "MyProfile",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\MyAccount\\\\MyProfile.vue",
-        "chunkName": "pages/MyAccount/MyProfile"
+        "chunkName": "pages/MyAccount/MyProfile",
+        "_name": "_c84810ea"
       },
       {
         "name": "MyAccount-MyReviews___de",
         "path": "MyReviews",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\MyAccount\\\\MyReviews.vue",
-        "chunkName": "pages/MyAccount/MyReviews"
+        "chunkName": "pages/MyAccount/MyReviews",
+        "_name": "_39424e06"
       },
       {
         "name": "MyAccount-OrderHistory___de",
         "path": "OrderHistory",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\MyAccount\\\\OrderHistory.vue",
-        "chunkName": "pages/MyAccount/OrderHistory"
+        "chunkName": "pages/MyAccount/OrderHistory",
+        "_name": "_ec90dfb0"
       },
       {
         "name": "MyAccount-ShippingDetails___de",
         "path": "ShippingDetails",
         "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\MyAccount\\\\ShippingDetails.vue",
-        "chunkName": "pages/MyAccount/ShippingDetails"
+        "chunkName": "pages/MyAccount/ShippingDetails",
+        "_name": "_3cdd843c"
       }
-    ]
+    ],
+    "_name": "_44ab88bc"
   },
   {
     "name": "Product___de",
     "path": "/de/Product",
     "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\Product.vue",
-    "chunkName": "pages/Product"
+    "chunkName": "pages/Product",
+    "_name": "_6b0b6620"
   },
   {
     "name": "reset-password___de",
     "path": "/de/reset-password",
-    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\ResetPassword.vue"
+    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\ResetPassword.vue",
+    "_name": "_e372a566"
+  },
+  {
+    "name": "ResetPassword___de",
+    "path": "/de/ResetPassword",
+    "component": "C:\\\\Users\\\\Asus\\\\Desktop\\\\Studies\\\\dbms project\\\\ecommerce\\\\pages\\\\ResetPassword.vue",
+    "chunkName": "pages/ResetPassword",
+    "_name": "_24d364cb"
   },
   {
     "name": "my-account___de",
     "path": "/de/my-account/:pageName?",
-    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\MyAccount.vue"
+    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\MyAccount.vue",
+    "_name": "_558a1524"
   },
   {
     "name": "product___de",
     "path": "/de/p/:id/:slug",
-    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Product.vue"
+    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Product.vue",
+    "_name": "_07b2c21c"
   },
   {
     "name": "category___de",
     "path": "/de/c/:slug_1/:slug_2?/:slug_3?/:slug_4?/:slug_5?",
-    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Category.vue"
+    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Category.vue",
+    "_name": "_683c6f0b"
   },
   {
     "name": "my-account___en",
     "path": "/my-account/:pageName?",
-    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\MyAccount.vue"
+    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\MyAccount.vue",
+    "_name": "_558a1524"
   },
   {
     "name": "product___en",
     "path": "/p/:id/:slug",
-    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Product.vue"
+    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Product.vue",
+    "_name": "_07b2c21c"
   },
   {
     "name": "category___en",
     "path": "/c/:slug_1/:slug_2?/:slug_3?/:slug_4?/:slug_5?",
-    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Category.vue"
+    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Category.vue",
+    "_name": "_683c6f0b"
   },
   {
     "name": "home___en",
     "path": "/",
-    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Home.vue"
+    "component": "C:\\Users\\Asus\\Desktop\\Studies\\dbms project\\ecommerce\\pages\\Home.vue",
+    "_name": "_287550ec"
   }
 ]

@@ -28,7 +28,8 @@ const _39424e06 = () => interopDefault(import('..\\pages\\MyAccount\\MyReviews.v
 const _ec90dfb0 = () => interopDefault(import('..\\pages\\MyAccount\\OrderHistory.vue' /* webpackChunkName: "pages/MyAccount/OrderHistory" */))
 const _3cdd843c = () => interopDefault(import('..\\pages\\MyAccount\\ShippingDetails.vue' /* webpackChunkName: "pages/MyAccount/ShippingDetails" */))
 const _6b0b6620 = () => interopDefault(import('..\\pages\\Product.vue' /* webpackChunkName: "pages/Product" */))
-// const _e372a566 = () => interopDefault(import('..\\pages\\ResetPassword.vue' /* webpackChunkName: "" */))
+const _e372a566 = () => interopDefault(import('..\\pages\\ResetPassword.vue' /* webpackChunkName: "" */))
+const _24d364cb = () => interopDefault(import('..\\pages\\ResetPassword.vue' /* webpackChunkName: "pages/ResetPassword" */))
 const _558a1524 = () => interopDefault(import('..\\pages\\MyAccount.vue' /* webpackChunkName: "" */))
 const _07b2c21c = () => interopDefault(import('..\\pages\\Product.vue' /* webpackChunkName: "" */))
 const _683c6f0b = () => interopDefault(import('..\\pages\\Category.vue' /* webpackChunkName: "" */))
@@ -143,13 +144,15 @@ export const routerOptions = {
     path: "/Product",
     component: _6b0b6620,
     name: "Product___en"
-  },
-  // {
-  //   path: "/reset-password",
-  //   component: _e372a566,
-  //   name: "reset-password___en"
-  // },
-  {
+  }, {
+    path: "/reset-password",
+    component: _e372a566,
+    name: "reset-password___en"
+  }, {
+    path: "/ResetPassword",
+    component: _24d364cb,
+    name: "ResetPassword___en"
+  }, {
     path: "/de/Category",
     component: _645e80cd,
     name: "Category___de"
@@ -244,13 +247,15 @@ export const routerOptions = {
     path: "/de/Product",
     component: _6b0b6620,
     name: "Product___de"
-  },
-  // {
-  //   path: "/de/reset-password",
-  //   component: _e372a566,
-  //   name: "reset-password___de"
-  // },
-  {
+  }, {
+    path: "/de/reset-password",
+    component: _e372a566,
+    name: "reset-password___de"
+  }, {
+    path: "/de/ResetPassword",
+    component: _24d364cb,
+    name: "ResetPassword___de"
+  }, {
     path: "/de/my-account/:pageName?",
     component: _558a1524,
     name: "my-account___de"
