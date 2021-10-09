@@ -1,6 +1,7 @@
 # My Secret
 .DS_Store
 secret/
+node_modules
 
 # Distribution / packaging
 bin/
