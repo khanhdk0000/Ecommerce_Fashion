@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-)6y5r*s2m*r#n4=fz)x)7(ts$h=$lc^!-b$cqs3g6ndjuuqdtq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -44,11 +44,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Third party
     "rest_framework",
-    "rest_framework.authtoken",
     "corsheaders",
-    "djoser",
     # My Modules
-    "posts",
+    'product'
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -93,7 +91,7 @@ WSGI_APPLICATION = "backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "ecommerce",
+        "NAME": "fashion",
         "USER": ADMIN_USERNAME,
         "PASSWORD": ADMIN_PASS,
         "HOST": "localhost",  # Or an IP Address that your DB is hosted on
