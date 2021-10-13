@@ -27,7 +27,7 @@ CREATE TABLE `category` (
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`category_id`),
   UNIQUE KEY `category_id_UNIQUE` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ DROP TABLE IF EXISTS `order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order` (
-  `order_id` int NOT NULL,
+  `order_id` int NOT NULL AUTO_INCREMENT,
   `required_date` datetime NOT NULL,
   `ordered_date` datetime NOT NULL,
   `customer_id` int NOT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE `order_detail` (
   `order_id` int NOT NULL,
   `product_id` int NOT NULL,
   `quantity` int NOT NULL,
-  `price` decimal(10,0) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
   PRIMARY KEY (`order_id`,`product_id`),
   UNIQUE KEY `order_id_UNIQUE` (`order_id`),
   UNIQUE KEY `product_id_UNIQUE` (`product_id`),
@@ -132,6 +132,20 @@ CREATE TABLE `product` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `product_category`
+--
+
+DROP TABLE IF EXISTS `product_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `product_category` (
+  `category_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `registered_customer`
 --
 
@@ -139,10 +153,10 @@ DROP TABLE IF EXISTS `registered_customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `registered_customer` (
-  `customer_id` int NOT NULL,
-  `name` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL COMMENT 'Must check if the email is of the right format or not?',
-  `password` varchar(45) NOT NULL,
+  `customer_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL COMMENT 'Must check if the email is of the right format or not?',
+  `password` varchar(100) NOT NULL,
   PRIMARY KEY (`customer_id`),
   UNIQUE KEY `customer_id_UNIQUE` (`customer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -158,9 +172,12 @@ DROP TABLE IF EXISTS `subcategory`;
 CREATE TABLE `subcategory` (
   `subcategory_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
+  `category_id` int NOT NULL,
   PRIMARY KEY (`subcategory_id`),
-  UNIQUE KEY `subcategory_id_UNIQUE` (`subcategory_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8;
+  UNIQUE KEY `subcategory_id_UNIQUE` (`subcategory_id`),
+  KEY `category_subcategory_idx` (`category_id`),
+  CONSTRAINT `category_subcategory` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -172,4 +189,4 @@ CREATE TABLE `subcategory` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-02 19:01:25
+-- Dump completed on 2021-10-13 13:33:23
