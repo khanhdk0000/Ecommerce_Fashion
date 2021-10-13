@@ -1,6 +1,7 @@
 # ignore server configuration
 *.azcli
 secret/
+.history
 
 # Logs
 logs
