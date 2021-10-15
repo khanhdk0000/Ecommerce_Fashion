@@ -8,11 +8,11 @@ from product.models import Product
 
 # Create your views here.
 class OrderView(APIView):
-    def get(self, request, id=None):
-        if id:
+    def get(self, request, order_id=None):
+        if order_id:
             # If an id is provided in the GET request, retrieve the Todo item by that id
             try:
-                queryset = Order.objects.get(order_id=id)
+                queryset = Order.objects.get(order_id=order_id)
             except Order.DoesNotExist:
                 return Response({"errors": "This order does not exist."}, status=400)
             read_serializer = OrderSerializer(queryset)
@@ -42,8 +42,8 @@ class OrderView(APIView):
         # If the users POST data is not valid, return a 400 response with an error message
         return Response(create_serializer.errors, status=400)
 
-    def put(self, request, id=None):
-        item = self._check_item(id)
+    def put(self, request, order_id=None):
+        item = self._check_item(order_id)
 
         # If the item does exists, use the serializer to validate the updated data
         update_serializer = OrderSerializer(item, data=request.data)
@@ -62,8 +62,8 @@ class OrderView(APIView):
         # If the update data is not valid, return an error response
         return Response(update_serializer.errors, status=400)
 
-    def delete(self, request, id=None):
-        item = self._check_item(id)
+    def delete(self, request, order_id=None):
+        item = self._check_item(order_id)
 
         # Delete the chosen item from db
         item.delete()
@@ -94,11 +94,9 @@ class OrderDetailView(APIView):
                     {"errors": "This order detail does not exist."}, status=400
                 )
             read_serializer = OrderDetailSerializer(queryset)
+            return Response(read_serializer.data)
         else:
-            queryset = OrderDetail.objects.all()
-            read_serializer = OrderDetailSerializer(queryset, many=True)
-
-        return Response(read_serializer.data)
+            return Response({"errors": "Not providing enough information"}, status=400)
 
     def post(self, request):
         # Pass JSON data from user POST request to serializer for validation

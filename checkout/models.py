@@ -26,20 +26,20 @@ class Order(models.Model):
     )
     required_date = models.DateTimeField(null=False)
     ordered_date = models.DateTimeField(null=False)
-    customer_id = models.ForeignKey(
+    customer = models.ForeignKey(
         RegisteredCustomer, null=False, on_delete=models.CASCADE
     )
 
     def __str__(self):
-        return f"order_id: {self.order_id}, customer_id: {self.customer_id}"
+        return f"order_id: {self.order_id}, customer_id: {self.customer}"
 
     class Meta:
         db_table = "order"
 
 
 class OrderDetail(models.Model):
-    order_id = models.ForeignKey(Order, null=False, on_delete=models.CASCADE)
-    product_id = models.ForeignKey(Product, null=False, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, null=False, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, null=False, on_delete=models.CASCADE)
     quantity = models.IntegerField(null=False, editable=True)
     price = models.DecimalField(null=False, decimal_places=2, max_digits=10)
 
@@ -48,3 +48,4 @@ class OrderDetail(models.Model):
 
     class Meta:
         db_table = "order_detail"
+        unique_together = (("order", "product"),)

@@ -1,6 +1,4 @@
-from typing_extensions import Required
 from rest_framework import serializers
-
 from checkout.models import Order, OrderDetail, RegisteredCustomer
 
 
@@ -13,7 +11,6 @@ class RegisteredCustomerSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     required_date = serializers.DateTimeField(required=True)
     ordered_date = serializers.DateTimeField(required=True)
-    customer_id = serializers.SerializerMethodField()
 
     class Meta:
         model = Order
