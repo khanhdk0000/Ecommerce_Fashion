@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper">
-    <nav class="navbar">
+    <nav class="navbar has-shadow">
       <!-- Container is for pushing out of the border -->
       <div class="container">
         <div class="navbar-brand">
@@ -348,7 +348,7 @@
       <router-view />
     </section>
 
-    <footer class="footer">
+    <footer class="footer ">
       <p class="has-text-centered">Copyright (c) 2021</p>
     </footer>
   </div>
@@ -437,6 +437,7 @@ export default {
 
 .navbar-item.is-mega {
   position: static;
+  z-index: 5000;
 
   .is-mega-menu-title {
     margin-bottom: 0;

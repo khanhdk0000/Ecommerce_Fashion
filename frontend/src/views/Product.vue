@@ -1,91 +1,202 @@
 <template>
-    <div class="page-product">
-        <div class="columns is-multiline">
-            <div class="column is-9">
-                <figure class="image mb-6">
-                    <img v-bind:src="product.get_image">
-                </figure>
+  <div class="page-product">
+    <div class="columns is-multiline">
+      <div class="column is-9">
+        <figure class="image mb-6">
+          <img v-bind:src="product.get_image" />
+        </figure>
 
-                <h1 class="title">{{ product.name }}</h1>
+        <h1 class="title">{{ product.name }}</h1>
 
-                <p>{{ product.description }}</p>
-            </div>
+        <p>{{ product.description }}</p>
+      </div>
 
-            <div class="column is-3">
-                <h2 class="subtitle">Information</h2>
+      <div class="column is-3">
+        <h2 class="subtitle">Information</h2>
 
-                <p><strong>Price: </strong>${{ product.price }}</p>
+        <p><strong>Price: </strong>${{ product.price }}</p>
 
-                <div class="field has-addons mt-6">
-                    <div class="control">
-                        <input type="number" class="input" min="1" v-model="quantity">
-                    </div>
+        <div class="field has-addons mt-6">
+          <div class="control">
+            <input type="number" class="input" min="1" v-model="quantity" />
+          </div>
 
-                    <div class="control">
-                        <a class="button is-dark" @click="addToCart()">Add to cart</a>
-                    </div>
-                </div>
-            </div>
+          <div class="control">
+            <a class="button is-dark" @click="addToCart()">Add to cart</a>
+          </div>
         </div>
+      </div>
     </div>
+    <!-- cards -->
+    <section class="section is-hidden-mobile">
+      <div class="container">
+        <h3 class="title has-text-centered is-size-4">Related Products</h3>
+        <div class="mt-5 columns is-centered is-8 is-variable features">
+          <div class="column is-4-tablet is-3-desktop">
+            <div class="card">
+              <div class="card-image has-text-centered px-4">
+                <figure class="image is-4by3 product-crop">
+                  <img
+                    class="product-crop"
+                    src="../assets/wristwatch-1149669.jpg"
+                    alt="Placeholder image"
+                  />
+                </figure>
+              </div>
+              <div class="card-content">
+                <p>£12.95</p>
+                <p class="title is-size-5">Cortardo Cup</p>
+              </div>
+              <footer class="card-footer">
+                <p class="card-footer-item">
+                  <a href="#" class="has-text-grey">View</a>
+                </p>
+              </footer>
+            </div>
+          </div>
+          <div class="column is-4-tablet is-3-desktop">
+            <div class="card">
+              <div class="card-image has-text-centered px-4">
+                <figure class="image is-4by3">
+                  <img
+                    class="product-crop"
+                    src="../assets/tie-690084.jpg"
+                    alt="Placeholder image"
+                  />
+                </figure>
+              </div>
+              <div class="card-content">
+                <p>£12.95</p>
+                <p class="title is-size-5">Cortardo Cup</p>
+              </div>
+              <footer class="card-footer">
+                <p class="card-footer-item">
+                  <a href="#" class="has-text-grey">View</a>
+                </p>
+              </footer>
+            </div>
+          </div>
+          <div class="column is-4-tablet is-3-desktop">
+            <div class="card">
+              <div class="card-image has-text-centered px-4">
+                <figure class="image is-4by3">
+                  <img
+                    class="product-crop"
+                    src="../assets/logo.png"
+                    alt="Placeholder image"
+                  />
+                </figure>
+              </div>
+              <div class="card-content">
+                <p>£12.95</p>
+                <p class="title is-size-5">Cortardo Cup</p>
+              </div>
+              <footer class="card-footer">
+                <p class="card-footer-item">
+                  <a href="#" class="txt-hover has-text-grey">View</a>
+                </p>
+              </footer>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
 </template>
 
 <script>
-import axios from 'axios'
-import { toast } from 'bulma-toast'
+import axios from "axios";
+import { toast } from "bulma-toast";
 
 export default {
-    name: 'Product',
-    data() {
-        return {
-            product: {},
-            quantity: 1
-        }
+  name: "Product",
+  data() {
+    return {
+      product: {},
+      quantity: 1,
+    };
+  },
+  mounted() {
+    this.getProduct();
+  },
+  methods: {
+    async getProduct() {
+      this.$store.commit("setIsLoading", true);
+
+      const category_slug = this.$route.params.category_slug;
+      const product_slug = this.$route.params.product_slug;
+
+      await axios
+        .get(`/api/v1/products/${category_slug}/${product_slug}`)
+        .then((response) => {
+          this.product = response.data;
+
+          document.title = this.product.name + " | Djackets";
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      this.$store.commit("setIsLoading", false);
     },
-    mounted() {
-        this.getProduct() 
+    addToCart() {
+      if (isNaN(this.quantity) || this.quantity < 1) {
+        this.quantity = 1;
+      }
+
+      const item = {
+        product: this.product,
+        quantity: this.quantity,
+      };
+
+      this.$store.commit("addToCart", item);
+
+      toast({
+        message: "The product was added to the cart",
+        type: "is-success",
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 2000,
+        position: "bottom-right",
+      });
     },
-    methods: {
-        async getProduct() {
-            this.$store.commit('setIsLoading', true)
-
-            const category_slug = this.$route.params.category_slug
-            const product_slug = this.$route.params.product_slug
-
-            await axios
-                .get(`/api/v1/products/${category_slug}/${product_slug}`)
-                .then(response => {
-                    this.product = response.data
-
-                    document.title = this.product.name + ' | Djackets'
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-            
-            this.$store.commit('setIsLoading', false)
-        },
-        addToCart() {
-            if (isNaN(this.quantity) || this.quantity < 1) {
-                this.quantity = 1
-            }
-
-            const item = {
-                product: this.product,
-                quantity: this.quantity
-            }
-
-            this.$store.commit('addToCart', item)
-
-            toast({
-                message: 'The product was added to the cart',
-                type: 'is-success',
-                dismissible: true,
-                pauseOnHover: true,
-                duration: 2000,
-                position: 'bottom-right',
-            })
-        }
-    }
-}
+  },
+};
 </script>
+
+<style lang="scss" scoped>
+.product-crop {
+  object-fit: cover;
+}
+
+.card:hover {
+  transition: transform .5s;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 2s cubic-bezier(.165, .84, .44, 1);
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15);
+    content: '';
+    opacity: 0;
+    z-index: -1;
+  }
+
+  &:hover,
+  &:focus {
+    transform: scale3d(1.006, 1.006, 1);
+
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+.txt-hover:hover{
+    text-decoration: underline;
+}
+</style>
