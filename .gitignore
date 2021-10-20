@@ -1,6 +1,11 @@
+# backend file
+backend/
+checkout/
+product/
+secret/
+
 # ignore server configuration
 *.azcli
-secret/
 .history
 
 # Logs

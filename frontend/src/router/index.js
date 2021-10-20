@@ -42,9 +42,9 @@ const routes = [
     path: '/my-account',
     name: 'MyAccount',
     component: MyAccount,
-    meta: {
-        requireLogin: true
-    }
+    // meta: {
+    //     requireLogin: true
+    // }
   },
   {
     path: '/search',

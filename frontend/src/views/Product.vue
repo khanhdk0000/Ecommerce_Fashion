@@ -128,9 +128,10 @@ export default {
       const product_slug = this.$route.params.product_slug;
 
       await axios
-        .get(`/api/v1/products/${category_slug}/${product_slug}`)
+        .get(`localhost:8080/product/search/${category_slug}/${product_slug}`)
         .then((response) => {
           this.product = response.data;
+          console.log(response);
 
           document.title = this.product.name + " | Djackets";
         })
