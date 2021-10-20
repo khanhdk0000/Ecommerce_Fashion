@@ -167,7 +167,6 @@
                           <p>Perfume</p>
                         </div>
                       </a>
-
                     </div>
 
                     <div class="column">
@@ -190,7 +189,9 @@
                     </div>
 
                     <div class="column">
-                      <h1 class="title is-6 is-mega-menu-title">Personal Care</h1>
+                      <h1 class="title is-6 is-mega-menu-title">
+                        Personal Care
+                      </h1>
                       <a class="navbar-item" href="#">
                         <div class="navbar-content">
                           <p>Fragrance</p>
@@ -248,9 +249,10 @@
                       </a>
                     </div>
 
-                    
                     <div class="column">
-                      <h1 class="title is-6 is-mega-menu-title">Sporting Goods</h1>
+                      <h1 class="title is-6 is-mega-menu-title">
+                        Sporting Goods
+                      </h1>
                       <a class="navbar-item" href="#">
                         <div class="navbar-content">
                           <p>Sports Equipment</p>
@@ -262,7 +264,6 @@
                         </div>
                       </a>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -313,11 +314,11 @@
               </div> -->
 
             <!-- User login  -->
-            <router-link to="/cart" class="navbar-item">
+            <!-- <router-link to="/log-in" class="navbar-item">
               <span class="icon mx-4">
                 <i class="far fa-user"></i>
               </span>
-            </router-link>
+            </router-link> -->
 
             <!-- Wishlist  -->
             <router-link to="/cart" class="navbar-item">
@@ -332,6 +333,45 @@
                 ><i class="fas fa-shopping-cart"></i
               ></span>
             </router-link>
+
+            <div class="navbar-item dropdown is-hoverable">
+              <div class="dropdown-trigger">
+                <div v-if="user">
+                  <figure class="image is-24x24">
+                    <img :src="avatarUrl" />
+                  </figure>
+                </div>
+                <div v-else>
+                  <span class="icon mx-4">
+                    <i class="far fa-user"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                  <div v-if="user">
+                    <router-link to="/my-account" class="dropdown-item">
+                      My Account
+                    </router-link>
+                    <hr class="dropdown-divider" />
+                    <button
+                      class="button is-white is-small"
+                      @click="handleClick"
+                    >
+                      Log Out
+                    </button>
+                  </div>
+                  <div v-else>
+                    <router-link to="/log-in" class="dropdown-item">
+                      Log In
+                    </router-link>
+                    <router-link to="/sign-up" class="dropdown-item">
+                      Sign Up
+                    </router-link>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -348,7 +388,7 @@
       <router-view />
     </section>
 
-    <footer class="footer ">
+    <footer class="footer">
       <p class="has-text-centered">Copyright (c) 2021</p>
     </footer>
   </div>
@@ -356,8 +396,30 @@
 
 <script>
 import axios from "axios";
+import getUser from "./composables/getUser";
+import useLogout from "./composables/useLogout";
+import { useRouter } from "vue-router";
+import { computed } from "vue";
 
 export default {
+  setup() {
+    const { user } = getUser();
+    const { logout } = useLogout();
+    const router = useRouter();
+
+    const handleClick = async () => {
+      await logout();
+      console.log("logged out");
+      router.push({ name: "LogIn" });
+    };
+
+    const avatarUrl = computed(()=> {
+      let url = `https://avatars.dicebear.com/api/micah/${user.value.displayName}.svg`
+      return url
+    })
+
+    return { handleClick, user, avatarUrl };
+  },
   data() {
     return {
       showMobileMenu: false,
@@ -396,7 +458,6 @@ export default {
 
 <style lang="scss">
 @import "../node_modules/bulma";
-
 
 .lds-dual-ring {
   display: inline-block;
