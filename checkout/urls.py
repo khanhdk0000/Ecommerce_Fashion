@@ -10,4 +10,6 @@ urlpatterns = [
         "api/checkout/cart/<int:order_id>&<int:product_id>/",
         views.OrderDetailView.as_view(),
     ),
+    path("api/user/", views.RegisteredCustomerView.as_view()),
+    path("api/user/<int:customer_id>", views.RegisteredCustomerView.as_view()),
 ]

@@ -27,7 +27,10 @@ class Order(models.Model):
     required_date = models.DateTimeField(null=False)
     ordered_date = models.DateTimeField(null=False)
     customer = models.ForeignKey(
-        RegisteredCustomer, null=False, on_delete=models.CASCADE
+        RegisteredCustomer,
+        null=False,
+        on_delete=models.CASCADE,
+        related_name="customer_order",
     )
 
     def __str__(self):
@@ -38,8 +41,15 @@ class Order(models.Model):
 
 
 class OrderDetail(models.Model):
-    order = models.ForeignKey(Order, null=False, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, null=False, on_delete=models.CASCADE)
+    order = models.ForeignKey(
+        Order, null=False, on_delete=models.CASCADE, related_name="order_order_detail"
+    )
+    product = models.ForeignKey(
+        Product,
+        null=False,
+        on_delete=models.CASCADE,
+        related_name="product_order_detail",
+    )
     quantity = models.IntegerField(null=False, editable=True)
     price = models.DecimalField(null=False, decimal_places=2, max_digits=10)
 

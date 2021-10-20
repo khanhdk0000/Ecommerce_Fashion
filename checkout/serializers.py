@@ -3,9 +3,28 @@ from checkout.models import Order, OrderDetail, RegisteredCustomer
 
 
 class RegisteredCustomerSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(required=True)
+    email = serializers.EmailField(required=True)
+    password = serializers.CharField(required=True)
+
     class Meta:
         model = RegisteredCustomer
         fields = ("customer_id", "name", "email", "password")
+
+    def create(self, validated_data):
+        return RegisteredCustomer.objects.create(
+            name=validated_data.get("name"),
+            email=validated_data.get("email"),
+            password=validated_data.get("password"),
+        )
+
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get("name", instance.name)
+        instance.email = validated_data.get("email", instance.email)
+        instance.password = validated_data.get("password", instance.password)
+
+        instance.save()
+        return instance
 
 
 class OrderSerializer(serializers.ModelSerializer):
