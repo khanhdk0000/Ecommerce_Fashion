@@ -127,8 +127,10 @@ export default {
 
       await axios
         .get(`/api/product/${id}`)
+
         .then((response) => {
           this.product = response.data;
+          console.log(response);
 
           document.title = this.product.name;
         })
