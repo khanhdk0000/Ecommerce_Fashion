@@ -63,7 +63,7 @@
     <div class="main section">
       <div class="sidebar">
         <Accordion v-for="i in sidebar_content" :key="i">
-          <AccordionItem :trigger="i.trigger" :contents="i.content" />
+          <AccordionItem :trigger="i.trigger" :contents="i.content"/>
         </Accordion>
       </div>
 
@@ -75,47 +75,37 @@
             v-bind:product="product"
             class=""
           />
-          <ProductBox
-            v-for="product in category.products"
-            v-bind:key="product.id"
-            v-bind:product="product"
-            class=""
-          />
-          <ProductBox
-            v-for="product in category.products"
-            v-bind:key="product.id"
-            v-bind:product="product"
-            class=""
-          />
         </div>
 
-        <nav class="pagination custom_pagination" role="navigation" aria-label="pagination">
-        <a
-          class="pagination-previous is-disabled"
-          title="This is the first page"
-          >Previous</a
+        <nav
+          class="pagination custom_pagination"
+          role="navigation"
+          aria-label="pagination"
         >
-        <a class="pagination-next">Next page</a>
-        <ul class="pagination-list">
-          <li>
-            <a
-              class="pagination-link is-current"
-              aria-label="Page 1"
-              aria-current="page"
-              >1</a
-            >
-          </li>
-          <li>
-            <a class="pagination-link" aria-label="Goto page 2">2</a>
-          </li>
-          <li>
-            <a class="pagination-link" aria-label="Goto page 3">3</a>
-          </li>
-        </ul>
-      </nav>
+          <a
+            class="pagination-previous is-disabled"
+            title="This is the first page"
+            >Previous</a
+          >
+          <a class="pagination-next">Next page</a>
+          <ul class="pagination-list">
+            <li>
+              <a
+                class="pagination-link is-current"
+                aria-label="Page 1"
+                aria-current="page"
+                >1</a
+              >
+            </li>
+            <li>
+              <a class="pagination-link" aria-label="Goto page 2">2</a>
+            </li>
+            <li>
+              <a class="pagination-link" aria-label="Goto page 3">3</a>
+            </li>
+          </ul>
+        </nav>
       </div>
-
-      
     </div>
   </div>
 </template>
@@ -167,23 +157,26 @@ export default {
   },
   watch: {
     $route(to, from) {
-      if (to.name === "Category") {
+
         this.getCategory();
-      }
+
     },
   },
   methods: {
     async getCategory() {
-      const categorySlug = this.$route.params.category_slug;
 
       this.$store.commit("setIsLoading", true);
 
-      axios
-        .get(`/api/v1/products/${categorySlug}/`)
-        .then((response) => {
-          this.category = response.data;
+      console.log(this.$route.query);
 
-          document.title = this.category.name + " | Djackets";
+      axios
+        .get(`/api/product/search`, {
+          params: this.$route.query,
+        })
+        .then((response) => {
+          this.category.products = response.data;
+
+          document.title = "Search";
         })
         .catch((error) => {
           console.log(error);
@@ -210,9 +203,8 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-.custom_pagination{
+.custom_pagination {
   background-color: white;
-
 }
 
 hr.solid {

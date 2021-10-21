@@ -1,20 +1,18 @@
 <template>
   <div class="page-product">
     <div class="columns is-multiline">
-      <div class="column is-9">
-        <figure class="image mb-6">
-          <img v-bind:src="product.get_image" />
+      <div class="column is-7">
+        <figure class="image mb-6 mr-6 is-4by5">
+          <img class="product-crop" v-bind:src="product.image_link" />
         </figure>
-
-        <h1 class="title">{{ product.name }}</h1>
-
-        <p>{{ product.description }}</p>
       </div>
 
-      <div class="column is-3">
-        <h2 class="subtitle">Information</h2>
+      <div class="column is-5">
+        <h1 class="title">{{ product.product_name }}</h1>
 
-        <p><strong>Price: </strong>${{ product.price }}</p>
+        <h2 class="subtitle">Information</h2>
+        <p>{{ product.product_type }}</p>
+        <p><strong>Price: </strong>${{ product.product_price }}</p>
 
         <div class="field has-addons mt-6">
           <div class="control">
@@ -28,6 +26,7 @@
       </div>
     </div>
     <!-- cards -->
+    <hr/>
     <section class="section is-hidden-mobile">
       <div class="container">
         <h3 class="title has-text-centered is-size-4">Related Products</h3>
@@ -101,7 +100,6 @@
         </div>
       </div>
     </section>
-
   </div>
 </template>
 
@@ -124,15 +122,15 @@ export default {
     async getProduct() {
       this.$store.commit("setIsLoading", true);
 
-      const category_slug = this.$route.params.category_slug;
-      const product_slug = this.$route.params.product_slug;
+      const id = this.$route.params.id;
+      // const product_slug = this.$route.params.product_slug;
 
       await axios
-        .get(`/api/v1/products/${category_slug}/${product_slug}`)
+        .get(`/api/product/${id}`)
         .then((response) => {
           this.product = response.data;
 
-          document.title = this.product.name + " | Djackets";
+          document.title = this.product.name;
         })
         .catch((error) => {
           console.log(error);
@@ -166,12 +164,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.product-image {
+  max-height: 200px;
+}
+
 .product-crop {
   object-fit: cover;
 }
 
 .card:hover {
-  transition: transform .5s;
+  transition: transform 0.5s;
 
   &::after {
     position: absolute;
@@ -179,9 +181,10 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    transition: opacity 2s cubic-bezier(.165, .84, .44, 1);
-    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15);
-    content: '';
+    transition: opacity 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.15);
+    content: "";
     opacity: 0;
     z-index: -1;
   }
@@ -196,7 +199,7 @@ export default {
   }
 }
 
-.txt-hover:hover{
-    text-decoration: underline;
+.txt-hover:hover {
+  text-decoration: underline;
 }
 </style>

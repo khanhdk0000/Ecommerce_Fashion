@@ -41,7 +41,7 @@ const routes = [
   {
     path: '/search',
     name: 'Search',
-    component: Search
+    component: Category
   },
   {
     path: '/cart',
@@ -62,15 +62,15 @@ const routes = [
     // }
   },
   {
-    path: '/:category_slug/:product_slug',
+    path: '/product/:id',
     name: 'Product',
     component: Product
   },
-  {
-    path: '/:category_slug',
-    name: 'Category',
-    component: Category
-  }
+  // {
+  //   path: '/category/:category_slug',
+  //   name: 'Category',
+  //   component: Category
+  // },
 ]
 
 const router = createRouter({

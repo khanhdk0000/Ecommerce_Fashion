@@ -30,244 +30,25 @@
         >
           <div class="navbar-start">
             <!-- Start menu item -->
-            <router-link to="/summer" class="navbar-item">Men</router-link>
-            <router-link to="/winter" class="navbar-item">Women</router-link>
+            <router-link
+              v-bind:to="{
+                name: 'Search',
+                query: { gender: 'men'},
+              }"
+              class="navbar-item"
+              >Men</router-link
+            >
+            <router-link
+              v-bind:to="{
+                name: 'Search',
+                query: { gender: 'Women' },
+              }"
+              class="navbar-item"
+              >Women</router-link
+            >
 
             <!-- Start Drop down big menu  -->
-            <div class="navbar-item has-dropdown is-hoverable is-mega">
-              <div class="navbar-link">Categories</div>
-              <div id="blogDropdown" class="navbar-dropdown">
-                <div class="container is-fluid">
-                  <div class="columns">
-                    <div class="column">
-                      <h1 class="title is-6 is-mega-menu-title">Apparel</h1>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Topwear</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Bottomwear</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Socks</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Innerwear</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Dress</p>
-                        </div>
-                      </a>
-
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Loungewear and Nightwear</p>
-                        </div>
-                      </a>
-
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Saree</p>
-                        </div>
-                      </a>
-
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Apparel Set</p>
-                        </div>
-                      </a>
-                    </div>
-
-                    <div class="column">
-                      <h1 class="title is-6 is-mega-menu-title">Accessories</h1>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Watches</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Socks</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Belts</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Bags</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Shoe Accessories</p>
-                        </div>
-                      </a>
-
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Jewellery</p>
-                        </div>
-                      </a>
-
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Eyewear</p>
-                        </div>
-                      </a>
-
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Scarves</p>
-                        </div>
-                      </a>
-
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Wallets</p>
-                        </div>
-                      </a>
-
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Headwear</p>
-                        </div>
-                      </a>
-
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Mufflers</p>
-                        </div>
-                      </a>
-
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Ties</p>
-                        </div>
-                      </a>
-
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Wallets</p>
-                        </div>
-                      </a>
-
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Perfume</p>
-                        </div>
-                      </a>
-                    </div>
-
-                    <div class="column">
-                      <h1 class="title is-6 is-mega-menu-title">Footwear</h1>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Shoes</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Flip Flops</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Sandal</p>
-                        </div>
-                      </a>
-                    </div>
-
-                    <div class="column">
-                      <h1 class="title is-6 is-mega-menu-title">
-                        Personal Care
-                      </h1>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Fragrance</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Lips</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Skin Care</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Makeup</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Nails</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Beauty Accessories</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Skin</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Eyes</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Bath and Body</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Hair</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Perfume</p>
-                        </div>
-                      </a>
-                    </div>
-
-                    <div class="column">
-                      <h1 class="title is-6 is-mega-menu-title">
-                        Sporting Goods
-                      </h1>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Sports Equipment</p>
-                        </div>
-                      </a>
-                      <a class="navbar-item" href="#">
-                        <div class="navbar-content">
-                          <p>Wristbands</p>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <MegaMenu />
 
             <!-- End big dropdown menu-->
           </div>
@@ -282,7 +63,7 @@
                       type="text"
                       class="input"
                       placeholder="What are you looking for?"
-                      name="query"
+                      name="name"
                     />
                   </div>
 
@@ -297,28 +78,6 @@
               </form>
               <!-- End Search bar  -->
             </div>
-
-            <!-- <div class="buttons">
-                <template v-if="$store.state.isAuthenticated">
-                  <router-link to="/my-account" class="button is-light"
-                    >My account</router-link
-                  >
-                </template>
-
-                <template v-else>
-                  <router-link to="/log-in" class="button is-light"
-                    >Log in</router-link
-                  >
-                </template>
-
-              </div> -->
-
-            <!-- User login  -->
-            <!-- <router-link to="/log-in" class="navbar-item">
-              <span class="icon mx-4">
-                <i class="far fa-user"></i>
-              </span>
-            </router-link> -->
 
             <!-- Wishlist  -->
             <router-link to="/cart" class="navbar-item">
@@ -400,6 +159,7 @@ import getUser from "./composables/getUser";
 import useLogout from "./composables/useLogout";
 import { useRouter } from "vue-router";
 import { computed } from "vue";
+import MegaMenu from "./components/MegaMenu.vue";
 
 export default {
   setup() {
@@ -413,12 +173,15 @@ export default {
       router.push({ name: "LogIn" });
     };
 
-    const avatarUrl = computed(()=> {
-      let url = `https://avatars.dicebear.com/api/micah/${user.value.displayName}.svg`
-      return url
-    })
+    const avatarUrl = computed(() => {
+      let url = `https://avatars.dicebear.com/api/micah/${user.value.displayName}.svg`;
+      return url;
+    });
 
     return { handleClick, user, avatarUrl };
+  },
+  components: {
+    MegaMenu,
   },
   data() {
     return {
