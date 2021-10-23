@@ -13,6 +13,7 @@ const logout = async () => {
   try {
     await projectAuth.signOut()
     isPending.value = false
+    console.log('log out complete!')
   }
   catch(err) {
     console.log(err.message)
