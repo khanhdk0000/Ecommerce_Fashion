@@ -106,6 +106,7 @@
 <script>
 import axios from "axios";
 import { toast } from "bulma-toast";
+import getUser from '../composables/getUser';
 
 export default {
   name: "Product",
@@ -113,6 +114,8 @@ export default {
     return {
       product: {},
       quantity: 1,
+      order: {},
+      order_detail: {}
     };
   },
   mounted() {
@@ -140,17 +143,84 @@ export default {
 
       this.$store.commit("setIsLoading", false);
     },
-    addToCart() {
+    async addToCart() {
       if (isNaN(this.quantity) || this.quantity < 1) {
         this.quantity = 1;
       }
 
-      const item = {
-        product: this.product,
-        quantity: this.quantity,
-      };
+      const {user} = getUser();
 
-      this.$store.commit("addToCart", item);
+      // console.log(this.product);
+      //* Config database field
+      let ordered_date = new Date();
+
+      let required_date = ordered_date; //? 3 day from ordered date
+      required_date.setDate(required_date.getDate() + 3);
+
+      ordered_date = ordered_date.toISOString().slice(0, 19).replace('T', ' ');
+      required_date = required_date.toISOString().slice(0, 19).replace('T', ' ');
+
+      console.log(`ordered_date: ${ordered_date}`);
+      console.log(`required_date: ${required_date}`);
+
+      console.log(`current user: ${user.value.displayName}`);
+      console.log(`current user's id: ${user.value.uid}`);
+
+      //* Put order to the db
+      await axios
+        .post("api/checkout/order/", {
+          "ordered_date":ordered_date,
+          "required_date":required_date,
+          "customer_id": user.value.uid,
+        })
+        .then(response => {
+          this.order = response.data;
+          // console.log(response.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+      //* Put order_detail to the db
+      let price = this.product.product_price * this.quantity;
+      // console.log(`order_id: ${this.order.order_id}`)
+      // console.log(`product_id: ${this.product.product_id}`)
+      // console.log(`price: ${price}`)
+      // console.log(`product price: ${this.product.product_price}`)
+      // console.log(`quantity: ${this.quantity}`)
+      await axios
+        .post("api/checkout/cart/", {
+          "order_id": this.order.order_id,
+          "product_id": this.product.product_id,
+          "quantity": this.quantity,
+          "price": price,
+        })
+        .then(response => {
+          this.order_detail = response.data;
+          console.log(response.data);
+        })
+        .catch(error => {
+          if (error.response){
+
+          //do something
+          console.log(`Error response: ${JSON.stringify(error.response)}`);
+
+          }else if(error.request){
+
+          //do something else
+          console.log(`Error request: ${error.request}`);
+
+          }else if(error.message){
+
+          //do something other than the other two
+          console.log(`Error message: ${error.message}`);
+
+          }
+        });
+
+      // * Commit to store and show message
+
+      this.$store.commit("addToCart", {product:this.product, quantity:this.quantity});
 
       toast({
         message: "The product was added to the cart",
