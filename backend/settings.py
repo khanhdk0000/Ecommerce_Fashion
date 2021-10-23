@@ -17,8 +17,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 with open("secret/admin.txt", "r") as f:
     lines = f.readlines()
-    ADMIN_USERNAME = lines[0][:-1]
-    ADMIN_PASS = lines[1]
+    DATABASE_NAME = lines[0][:-1]
+    ADMIN_USERNAME = lines[1][:-1]
+    ADMIN_PASS = lines[2]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -93,7 +94,7 @@ WSGI_APPLICATION = "backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "fashion",
+        "NAME": DATABASE_NAME,
         "USER": ADMIN_USERNAME,
         "PASSWORD": ADMIN_PASS,
         "HOST": "localhost",  # Or an IP Address that your DB is hosted on

@@ -6,11 +6,12 @@
 
 2. Create file admin.txt
 
-3. Add the username and password for MySQL
+3. Add your database's name, username and password for MySQL
 
 Example:
 
 ```
+ecommerce
 admin
 123456
 ```
