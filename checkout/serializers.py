@@ -30,6 +30,7 @@ class RegisteredCustomerSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     required_date = serializers.DateTimeField(required=True)
     ordered_date = serializers.DateTimeField(required=True)
+    customer_id = serializers.CharField(required=True)
 
     class Meta:
         model = Order
@@ -39,7 +40,7 @@ class OrderSerializer(serializers.ModelSerializer):
         return Order.objects.create(
             required_date=validated_data.get("required_date"),
             ordered_date=validated_data.get("ordered_date"),
-            customer_id=self.context["customer_id"],
+            customer_id=validated_data.get("customer_id"),
         )
 
     def update(self, instance, validated_data):
@@ -55,14 +56,19 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class OrderDetailSerializer(serializers.ModelSerializer):
+    order_id = serializers.IntegerField(required=True)
+    product_id = serializers.IntegerField(required=True)
+    quantity = serializers.IntegerField(required=True)
+    price = serializers.DecimalField(required=True, decimal_places=2, max_digits=10)
+
     class Meta:
         model = OrderDetail
         fields = ("order_id", "product_id", "quantity", "price")
 
     def create(self, validated_data):
         return OrderDetail.objects.create(
-            order_id=self.context["order_id"],
-            product_id=self.context["product_id"],
+            order_id=validated_data.get("order_id"),
+            product_id=validated_data.get("product_id"),
             quantity=validated_data.get("quantity"),
             price=validated_data.get("price"),
         )

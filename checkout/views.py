@@ -32,7 +32,7 @@ class OrderView(APIView):
     def post(self, request):
         # Pass JSON data from user POST request to serializer for validation
         create_serializer = OrderSerializer(
-            data=request.data, context={"customer_id": RegisteredCustomer}
+            data=request.data,
         )
 
         # Check if user POST data passes validation checks from serializer
@@ -93,9 +93,9 @@ class OrderDetailView(APIView):
         if order_id and product_id:
             # If an id is provided in the GET request, retrieve the Todo item by that id
             try:
-                queryset = OrderDetail.objects.get(
+                queryset = OrderDetail.objects.filter(
                     order_id=order_id, product_id=product_id
-                )
+                )[0]
             except OrderDetail.DoesNotExist:
                 return Response(
                     {"errors": "This order detail does not exist."}, status=400
@@ -118,7 +118,6 @@ class OrderDetailView(APIView):
         # Pass JSON data from user POST request to serializer for validation
         create_serializer = OrderDetailSerializer(
             data=request.data,
-            context={"order_id": Order, "product_id": Product},
         )
 
         # Check if user POST data passes validation checks from serializer
@@ -167,7 +166,9 @@ class OrderDetailView(APIView):
     def _check_item(self, order_id, product_id):
         try:
             # Check if the todo item the user wants to update exists
-            item = OrderDetail.objects.get(order_id=order_id, product_id=product_id)
+            item = OrderDetail.objects.filter(order_id=order_id, product_id=product_id)[
+                0
+            ]
             return item
         except OrderDetail.DoesNotExist:
             # If the todo item does not exist, return an error response
