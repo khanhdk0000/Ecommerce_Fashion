@@ -97,7 +97,7 @@
               <div class="dropdown-trigger">
                 <div v-if="user">
                   <figure class="image is-24x24">
-                    <img :src="avatarUrl" />
+                    <img :src="avatarUrl" v-if="renderAvatar"/>
                   </figure>
                 </div>
                 <div v-else>
@@ -162,6 +162,7 @@ import { computed } from "vue";
 import MegaMenu from "./components/MegaMenu.vue";
 
 export default {
+  name: 'app',
   setup() {
     const { user } = getUser();
     const { logout } = useLogout();
@@ -170,21 +171,37 @@ export default {
     const handleClick = async () => {
       await logout();
       console.log("logged out");
-      router.push({ name: "LogIn" });
+      router.push('/log-in');
     };
 
     const avatarUrl = computed(() => {
-      let url = `https://avatars.dicebear.com/api/micah/${user.value.displayName}.svg`;
+      let url = ''
+      if (user)
+        url = `https://avatars.dicebear.com/api/micah/${user.value.displayName}.svg`;
+      else
+        url = 'https://avatars.dicebear.com/api/micah/1.svg'
       return url;
     });
 
-    return { handleClick, user, avatarUrl };
+    return { handleClick, user, avatarUrl};
+  },
+  method: {
+    forceRerender() {
+      // Remove component from the DOM
+      this.renderAvatar=false;
+
+      this.$nextTick(() => {
+        // Add component back in
+        this.renderAvatar=true;
+      });
+    }
   },
   components: {
     MegaMenu,
   },
   data() {
     return {
+      renderAvatar: true,
       showMobileMenu: false,
       cart: {
         items: [],

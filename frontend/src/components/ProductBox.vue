@@ -42,7 +42,7 @@ export default {
     product: Object,
   },
   mounted() {
-    console.log(this.product);
+    console.log(this.product.product_name);
   },
 };
 </script>

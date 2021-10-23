@@ -74,7 +74,7 @@ export default {
       if (!error.value) {
         console.log("Sign up success");
         toast({
-          message: "Account created, please log in!",
+          message: "Account created, now you can gain access to the page!",
           type: "is-success",
           dismissible: true,
           pauseOnHover: true,
@@ -82,6 +82,29 @@ export default {
           position: "bottom-right",
         });
         // router.push({ name: "UserPlaylists" });
+        router.push('/')
+
+        //* Put user into the database
+        const user = res.user;
+        const userInfo = {
+          'customer_id':user.uid,
+          'name':user.displayName,
+          'email':user.email
+        };
+
+        // console.log(userInfo);
+        await axios.post('/api/user/', {
+          customer_id: userInfo.customer_id,
+          name: userInfo.name,
+          email: userInfo.email
+        })
+        .then(response => {
+          console.log(userInfo);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
       }
     };
 

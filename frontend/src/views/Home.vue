@@ -65,7 +65,7 @@ export default {
           console.log(error);
         });
 
-      console.log(this.latestProducts[0].product_name);
+      // console.log(this.latestProducts[0].product_name);
 
       this.$store.commit("setIsLoading", false);
     },

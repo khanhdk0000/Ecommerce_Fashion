@@ -6,12 +6,11 @@ from product.models import Product
 
 
 class RegisteredCustomer(models.Model):
-    customer_id = models.AutoField(
-        primary_key=True, null=False, unique=True, auto_created=True
+    customer_id = models.CharField(
+        primary_key=True, null=False, unique=True, max_length=100
     )
     name = models.CharField(max_length=100, null=False)
     email = models.EmailField(max_length=100, null=False)
-    password = models.CharField(max_length=100, null=False)
 
     def __str__(self):
         return self.name

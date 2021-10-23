@@ -16,7 +16,7 @@ const signup = async (email, password, displayName) => {
     await res.user.updateProfile({ displayName })
     error.value = null
     isPending.value = false
-    
+
     return res
   }
   catch(err) {
