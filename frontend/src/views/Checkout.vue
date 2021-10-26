@@ -153,7 +153,7 @@ export default {
     },
     methods: {
         getItemTotal(item) {
-            return item.quantity * item.product.price
+            return item.quantity * item.product.product_price
         },
         submitForm() {
             this.errors = []
@@ -189,7 +189,7 @@ export default {
             if (!this.errors.length) {
                 this.$store.commit('setIsLoading', true)
 
-                this.stripe.createToken(this.card).then(result => {                    
+                this.stripe.createToken(this.card).then(result => {
                     if (result.error) {
                         this.$store.commit('setIsLoading', false)
 
@@ -208,9 +208,9 @@ export default {
             for (let i = 0; i < this.cart.items.length; i++) {
                 const item = this.cart.items[i]
                 const obj = {
-                    product: item.product.id,
+                    product: item.product.product_id,
                     quantity: item.quantity,
-                    price: item.product.price * item.quantity
+                    price: item.product.product_price * item.quantity
                 }
 
                 items.push(obj)
@@ -246,7 +246,7 @@ export default {
     computed: {
         cartTotalPrice() {
             return this.cart.items.reduce((acc, curVal) => {
-                return acc += curVal.product.price * curVal.quantity
+                return acc += curVal.product.product_price * curVal.quantity
             }, 0)
         },
         cartTotalLength() {
