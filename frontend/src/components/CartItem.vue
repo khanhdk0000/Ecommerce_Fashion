@@ -1,7 +1,7 @@
 <template>
     <tr>
-        <td><router-link :to="item.product.get_absolute_url">{{ item.product.name }}</router-link></td>
-        <td>${{ item.product.price }}</td>
+        <td><router-link v-bind:to="{name: 'Product', params: {id: item.product.product_id}}">{{ item.product.product_name }}</router-link></td>
+        <td>${{ item.product.product_price }}</td>
         <td>
             {{ item.quantity }}
             <a @click="decrementQuantity(item)">-</a>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: 'CartItem',
     props: {
@@ -25,7 +26,7 @@ export default {
     },
     methods: {
         getItemTotal(item) {
-            return item.quantity * item.product.price
+            return item.quantity * item.product.product_price
         },
         decrementQuantity(item) {
             item.quantity -= 1
@@ -44,8 +45,26 @@ export default {
         updateCart() {
             localStorage.setItem('cart', JSON.stringify(this.$store.state.cart))
         },
-        removeFromCart(item) {
+        async removeFromCart(item) {
             this.$emit('removeFromCart', item)
+
+            //* Get order_id bind with this product_id
+            // await axios
+            //     .get(`api/checkout/cart/${item.product.product_id}`)
+            //     .then(response => {
+            //         console.log(response)
+            //     })
+            //     .catch(error => {
+            //         if (error.response){
+            //             console.log(`Error response: ${JSON.stringify(error.response)}`);
+            //         }else if(error.request){
+            //             console.log(`Error request: ${error.request}`);
+            //         }else if(error.message){
+            //             console.log(`Error message: ${error.message}`);
+            //         }
+            //     })
+            //* Remove the item from cart and any of its order_details
+
 
             this.updateCart()
         },

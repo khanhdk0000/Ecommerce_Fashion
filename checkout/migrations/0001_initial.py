@@ -9,49 +9,87 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('product', '0005_auto_20211011_0432'),
+        ("product", "0005_auto_20211011_0432"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Order',
+            name="Order",
             fields=[
-                ('order_id', models.AutoField(auto_created=True, primary_key=True, serialize=False, unique=True)),
-                ('required_date', models.DateTimeField()),
-                ('ordered_date', models.DateTimeField()),
+                (
+                    "order_id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        unique=True,
+                    ),
+                ),
+                ("required_date", models.DateTimeField()),
+                ("ordered_date", models.DateTimeField()),
             ],
             options={
-                'db_table': 'order',
+                "db_table": "order",
             },
         ),
         migrations.CreateModel(
-            name='RegisteredCustomer',
+            name="RegisteredCustomer",
             fields=[
-                ('customer_id', models.AutoField(auto_created=True, primary_key=True, serialize=False, unique=True)),
-                ('name', models.CharField(max_length=100)),
-                ('email', models.EmailField(max_length=100)),
-                ('password', models.CharField(max_length=100)),
+                (
+                    "customer_id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        unique=True,
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("email", models.EmailField(max_length=100)),
+                ("password", models.CharField(max_length=100)),
             ],
             options={
-                'db_table': 'registered_customer',
+                "db_table": "registered_customer",
             },
         ),
         migrations.CreateModel(
-            name='OrderDetail',
+            name="OrderDetail",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('quantity', models.IntegerField()),
-                ('price', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('order_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='checkout.order')),
-                ('product_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.product')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("quantity", models.IntegerField()),
+                ("price", models.DecimalField(decimal_places=2, max_digits=10)),
+                (
+                    "order_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="checkout.order"
+                    ),
+                ),
+                (
+                    "product_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="product.product",
+                    ),
+                ),
             ],
             options={
-                'db_table': 'order_detail',
+                "db_table": "order_detail",
             },
         ),
         migrations.AddField(
-            model_name='order',
-            name='customer_id',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='checkout.registeredcustomer'),
+            model_name="order",
+            name="customer_id",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="checkout.registeredcustomer",
+            ),
         ),
     ]

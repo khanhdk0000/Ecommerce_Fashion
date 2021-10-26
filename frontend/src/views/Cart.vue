@@ -20,7 +20,7 @@
                     <tbody>
                         <CartItem
                             v-for="item in cart.items"
-                            v-bind:key="item.product.id"
+                            v-bind:key="item.product.product_id"
                             v-bind:initialItem="item"
                             v-on:removeFromCart="removeFromCart" />
                     </tbody>
@@ -60,10 +60,15 @@ export default {
     },
     mounted() {
         this.cart = this.$store.state.cart
+        this.cart.items.forEach(element => {
+            console.log(element)
+        });
+        // console.log(this.cart.items)
     },
     methods: {
-        removeFromCart(item) {
-            this.cart.items = this.cart.items.filter(i => i.product.id !== item.product.id)
+        async removeFromCart(item) {
+            this.cart.items = this.cart.items.filter(i => i.product.product_id !== item.product.product_id)
+
         }
     },
     computed: {
@@ -74,7 +79,7 @@ export default {
         },
         cartTotalPrice() {
             return this.cart.items.reduce((acc, curVal) => {
-                return acc += curVal.product.price * curVal.quantity
+                return acc += curVal.product.product_price * curVal.quantity
             }, 0)
         },
     }

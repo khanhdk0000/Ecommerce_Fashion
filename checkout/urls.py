@@ -7,7 +7,7 @@ urlpatterns = [
     path("api/checkout/order/<int:order_id>/", views.OrderView.as_view()),
     path("api/checkout/cart/", views.OrderDetailView.as_view()),
     path(
-        "api/checkout/cart/<int:order_id>&<int:product_id>/",
+        "api/checkout/cart/<int:order_id>/<int:product_id>/",
         views.OrderDetailView.as_view(),
     ),
     path("api/user/", views.RegisteredCustomerView.as_view()),

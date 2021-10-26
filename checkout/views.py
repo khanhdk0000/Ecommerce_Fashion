@@ -100,8 +100,14 @@ class OrderDetailView(APIView):
                 return Response(
                     {"errors": "This order detail does not exist."}, status=400
                 )
-            read_serializer = OrderDetailSerializer(queryset)
-            return Response(read_serializer.data)
+        elif product_id and not order_id:
+            try:
+                queryset = OrderDetail.objects.filter(product_id=product_id)
+            except OrderDetail.DoesNotExist:
+                return Response(
+                    {"errors": "This product does not exist in any order detail."},
+                    status=400,
+                )
         else:
             # queryset = OrderDetail.objects.count()
             # print("-" * 50, end="\n\n")
@@ -112,7 +118,8 @@ class OrderDetailView(APIView):
                 {"errors": "Not providing order_id and product_id."}, status=400
             )
 
-        # return Response(read_serializer.data)
+        read_serializer = OrderDetailSerializer(queryset)
+        return Response(read_serializer.data)
 
     def post(self, request):
         # Pass JSON data from user POST request to serializer for validation

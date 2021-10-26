@@ -154,7 +154,7 @@ export default {
       //* Config database field
       let ordered_date = new Date();
 
-      let required_date = ordered_date; //? 3 day from ordered date
+      let required_date = new Date(); //? 3 day from ordered date
       required_date.setDate(required_date.getDate() + 3);
 
       ordered_date = ordered_date.toISOString().slice(0, 19).replace('T', ' ');
@@ -182,7 +182,6 @@ export default {
         });
 
       //* Put order_detail to the db
-      let price = this.product.product_price * this.quantity;
       // console.log(`order_id: ${this.order.order_id}`)
       // console.log(`product_id: ${this.product.product_id}`)
       // console.log(`price: ${price}`)
@@ -193,7 +192,7 @@ export default {
           "order_id": this.order.order_id,
           "product_id": this.product.product_id,
           "quantity": this.quantity,
-          "price": price,
+          "price": this.product.product_price,
         })
         .then(response => {
           this.order_detail = response.data;
@@ -201,26 +200,17 @@ export default {
         })
         .catch(error => {
           if (error.response){
-
-          //do something
-          console.log(`Error response: ${JSON.stringify(error.response)}`);
-
+            console.log(`Error response: ${JSON.stringify(error.response)}`);
           }else if(error.request){
-
-          //do something else
-          console.log(`Error request: ${error.request}`);
-
+            console.log(`Error request: ${error.request}`);
           }else if(error.message){
-
-          //do something other than the other two
-          console.log(`Error message: ${error.message}`);
-
+            console.log(`Error message: ${error.message}`);
           }
         });
 
       // * Commit to store and show message
 
-      this.$store.commit("addToCart", {product:this.product, quantity:this.quantity});
+      this.$store.commit("addToCart", {product:this.product, quantity:this.quantity, order: this.order});
 
       toast({
         message: "The product was added to the cart",

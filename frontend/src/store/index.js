@@ -23,11 +23,13 @@ export default createStore({
       } else {
           state.token = ''
           state.isAuthenticated = false
-      } 
+      }
     },
     addToCart(state, item) {
       const exists = state.cart.items.filter(i => i.product.product_id === item.product.product_id)
       if (exists.length) {
+        if (!exists[0].quantity)
+          exists[0].quantity = 0
         exists[0].quantity = parseInt(exists[0].quantity) + parseInt(item.quantity)
       } else {
         state.cart.items.push(item)
@@ -41,7 +43,7 @@ export default createStore({
     setToken(state, token) {
         state.token = token
         state.isAuthenticated = true
-    },  
+    },
     removeToken(state) {
         state.token = ''
         state.isAuthenticated = false
