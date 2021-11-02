@@ -1,5 +1,6 @@
 # backend file
 secret/
+envs
 
 # ignore server configuration
 *.azcli
