@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS ecommerce.product_by_category(
     product_price decimal,
     image_link text,
     category text,
-	PRIMARY KEY(product_id, category)
+	PRIMARY KEY ((category), product_id)
 )WITH comment = 'Find information about a product by category';
 
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS ecommerce.product_by_subcategory(
     product_price decimal,
     image_link text,
     subcategory text,
-	PRIMARY KEY(product_id, subcategory)
+	PRIMARY KEY ((subcategory), product_id)
 )WITH comment = 'Find information about a product by subcategory';
 
 CREATE TABLE IF NOT EXISTS ecommerce.product_by_gender(
@@ -58,5 +58,5 @@ CREATE TABLE IF NOT EXISTS ecommerce.product_by_gender(
     product_type text,
     product_price decimal,
     image_link text,
-	PRIMARY KEY(product_id, product_gender)
-)WITH comment = 'Find information about a product by subcategory';
+	PRIMARY KEY ((product_gender), product_id)
+)WITH comment = 'Find information about a product by gender';
