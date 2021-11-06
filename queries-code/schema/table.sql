@@ -260,7 +260,7 @@ DROP TABLE IF EXISTS `favorite`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `favorite` (
-  `favorite_id` int NOT NULL,
+  `favorite_id` int NOT NULL AUTO_INCREMENT,
   `customer_id` varchar(100) NOT NULL,
   PRIMARY KEY (`favorite_id`),
   UNIQUE KEY `favorite_id_UNIQUE` (`favorite_id`),
