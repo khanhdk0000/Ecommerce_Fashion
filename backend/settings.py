@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # My Modules
     "product",
     "checkout",
+    "favorite",
 ]
 
 CORS_ALLOWED_ORIGINS = [

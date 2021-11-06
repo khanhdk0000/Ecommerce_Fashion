@@ -5,6 +5,7 @@ envs
 # ignore server configuration
 *.azcli
 .history
+.*
 
 # Logs
 logs
