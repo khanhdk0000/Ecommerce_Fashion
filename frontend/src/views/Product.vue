@@ -114,8 +114,11 @@ export default {
     return {
       product: {},
       quantity: 1,
+      user_instance: {},
       order: {},
-      order_detail: {}
+      order_detail: {},
+      is_customer_order_exist: false,
+      is_order_detail_exist: false,
     };
   },
   mounted() {
@@ -143,6 +146,7 @@ export default {
 
       this.$store.commit("setIsLoading", false);
     },
+
     async addToCart() {
       if (isNaN(this.quantity) || this.quantity < 1) {
         this.quantity = 1;
@@ -166,47 +170,83 @@ export default {
       console.log(`current user: ${user.value.displayName}`);
       console.log(`current user's id: ${user.value.uid}`);
 
-      //* Put order to the db
-      await axios
-        .post("api/checkout/order/", {
-          "ordered_date":ordered_date,
-          "required_date":required_date,
-          "customer_id": user.value.uid,
-        })
-        .then(response => {
-          this.order = response.data;
-          // console.log(response.data);
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      this.user_instance = {
+        'customer_id': user.value.uid,
+        'name': user.value.displayName,
+        'email': user.value.email
+      }
 
-      //* Put order_detail to the db
-      // console.log(`order_id: ${this.order.order_id}`)
-      // console.log(`product_id: ${this.product.product_id}`)
-      // console.log(`price: ${price}`)
-      // console.log(`product price: ${this.product.product_price}`)
-      // console.log(`quantity: ${this.quantity}`)
-      await axios
-        .post("api/checkout/cart/", {
-          "order_id": this.order.order_id,
-          "product_id": this.product.product_id,
-          "quantity": this.quantity,
-          "price": this.product.product_price,
-        })
-        .then(response => {
-          this.order_detail = response.data;
-          console.log(response.data);
-        })
-        .catch(error => {
-          if (error.response){
-            console.log(`Error response: ${JSON.stringify(error.response)}`);
-          }else if(error.request){
-            console.log(`Error request: ${error.request}`);
-          }else if(error.message){
-            console.log(`Error message: ${error.message}`);
-          }
-        });
+      // ? Put order to the db if not already exist
+      // * Check if the order is already exist by the customer
+      await this.isExistOrder();
+      if (!this.is_customer_order_exist){
+        console.log('Adding order')
+        await axios
+          .post("api/checkout/order/", {
+            "ordered_date":ordered_date,
+            "required_date":required_date,
+            "customer": this.user_instance,
+          })
+          .then(response => {
+            this.order = response.data;
+            console.log(`Order added: ${this.order}`);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+      // * Hard update the local order
+      await this.isExistOrder();
+      // * Dont care the above
+
+      // ? Put order_detail to the db
+      // * Check whether the order_detail with product_id is already in the database
+      await this.isExistOrderDetail();
+      if (!this.is_order_detail_exist){
+        await axios
+          .post("api/checkout/cart/", {
+            "order": this.order,
+            "product": this.product,
+            "quantity": this.quantity,
+            "price": this.product.product_price * this.quantity,
+          })
+          .then(response => {
+            this.order_detail = response.data;
+            console.log(`Added order's detail: ${this.order_detail}`);
+          })
+          .catch(error => {
+            if (error.response){
+              console.log(`Error response: ${JSON.stringify(error.response)}`);
+            }else if(error.request){
+              console.log(`Error request: ${error.request}`);
+            }else if(error.message){
+              console.log(`Error message: ${error.message}`);
+            }
+          });
+      }
+      else{
+        // * Update the quantity and price of order's detail
+        const new_content = {
+          'quantity': this.product.quantity + this.quantity,
+          'price': this.product.price * (this.product.quantity + this.quantity)
+        }
+
+        await axios
+            .put(`api/checkout/cart/${this.order.order_id}/${this.product.product_id}/`, new_content)
+            .then(response => {
+              this.order_detail = response.data;
+              console.log(`Newly updated order's detail: ${this.order_detail}`);
+            })
+            .catch(error => {
+              if (error.response){
+                console.log(`Error response: ${JSON.stringify(error.response)}`);
+              }else if(error.request){
+                console.log(`Error request: ${error.request}`);
+              }else if(error.message){
+                console.log(`Error message: ${error.message}`);
+              }
+            });
+      }
 
       // * Commit to store and show message
 
@@ -220,6 +260,47 @@ export default {
         duration: 2000,
         position: "bottom-right",
       });
+    },
+
+    async isExistOrder(){
+      await axios
+          .get(`api/checkout/order/customer/${this.user_instance.customer_id}`)
+          .then(response => {
+            this.is_customer_order_exist=true;
+            this.order = response.data;
+            console.log(`Get order by customer's id:`);
+            console.log(response.data);
+          })
+          .catch(error => {
+            this.is_customer_order_exist=false;
+            if (error.response){
+              console.log(`Error response: ${JSON.stringify(error.response)}`);
+            }else if(error.request){
+              console.log(`Error request: ${error.request}`);
+            }else if(error.message){
+              console.log(`Error message: ${error.message}`);
+            }
+          })
+    },
+
+    async isExistOrderDetail(){
+      await axios
+          .get(`api/checkout/cart/${this.order.order_id}/${this.product.product_id}`)
+          .then(response => {
+            this.is_order_detail_exist=true;
+            console.log(`Get order's detail by order_id and product_id:`);
+            console.log(response);
+          })
+          .catch(error => {
+            this.is_order_detail_exist=false;
+            if (error.response){
+              console.log(`Error response: ${JSON.stringify(error.response)}`);
+            }else if(error.request){
+              console.log(`Error request: ${error.request}`);
+            }else if(error.message){
+              console.log(`Error message: ${error.message}`);
+            }
+          })
     },
   },
 };

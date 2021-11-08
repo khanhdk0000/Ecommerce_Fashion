@@ -40,21 +40,25 @@ class Order(models.Model):
 
 
 class OrderDetail(models.Model):
+    order_detail_id = models.AutoField(
+        primary_key=True, auto_created=True, unique=True, null=False)
     order = models.ForeignKey(
-        Order, null=False, on_delete=models.CASCADE, related_name="order_order_detail"
+        Order,
+        on_delete=models.CASCADE,
+        related_name="order_order_detail",
     )
     product = models.ForeignKey(
         Product,
-        null=False,
         on_delete=models.CASCADE,
         related_name="product_order_detail",
     )
-    quantity = models.IntegerField(null=False, editable=True)
-    price = models.DecimalField(null=False, decimal_places=2, max_digits=10)
+    quantity = models.IntegerField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return f"order_id: {self.order_id}, product_id: {self.product_id}"
 
     class Meta:
-        db_table = "order_detail"
-        unique_together = (("order", "product"),)
+        managed = True
+        db_table = 'order_detail'
+        unique_together = (('order', 'product'),)

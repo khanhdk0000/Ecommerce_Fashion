@@ -11,14 +11,23 @@ from checkout.serializers import (
 from product.models import Product
 
 # Create your views here.
+
+
 class OrderView(APIView):
-    def get(self, request, order_id=None):
+    def get(self, request, order_id=None, customer_id=None):
         if order_id:
             # If an id is provided in the GET request, retrieve the Todo item by that id
             try:
                 queryset = Order.objects.get(order_id=order_id)
             except Order.DoesNotExist:
                 return Response({"errors": "This order does not exist."}, status=400)
+            read_serializer = OrderSerializer(queryset)
+        elif customer_id and not order_id:
+            try:
+                queryset = Order.objects.get(
+                    customer_id=customer_id)
+            except Order.DoesNotExist:
+                return Response({"warnings": "This customer's order does not exist."}, status=303)
             read_serializer = OrderSerializer(queryset)
         else:
             queryset = Order.objects.all()
@@ -91,38 +100,46 @@ class OrderView(APIView):
 class OrderDetailView(APIView):
     def get(self, request, order_id=None, product_id=None):
         if order_id and product_id:
+            try:
+                queryset = OrderDetail.objects.get(
+                    order_id=order_id, product_id=product_id)
+
+                read_serializer = OrderDetailSerializer(queryset)
+            except OrderDetail.DoesNotExist:
+                return Response(
+                    {"warnings": "This order detail does not exist."}, status=303
+                )
+        elif order_id and not product_id:
             # If an id is provided in the GET request, retrieve the Todo item by that id
             try:
                 queryset = OrderDetail.objects.filter(
-                    order_id=order_id, product_id=product_id
-                )[0]
+                    order_id=order_id
+                )
+                read_serializer = OrderDetailSerializer(queryset, many=True)
             except OrderDetail.DoesNotExist:
                 return Response(
-                    {"errors": "This order detail does not exist."}, status=400
+                    {"errors": "No order details exist when search by order_id"}, status=400
                 )
         elif product_id and not order_id:
             try:
                 queryset = OrderDetail.objects.filter(product_id=product_id)
+                read_serializer = OrderDetailSerializer(queryset, many=True)
             except OrderDetail.DoesNotExist:
                 return Response(
-                    {"errors": "This product does not exist in any order detail."},
+                    {"errors": "No order details exist when search by product_id"},
                     status=400,
                 )
         else:
-            # queryset = OrderDetail.objects.count()
-            # print("-" * 50, end="\n\n")
-            # print(queryset, end="\n\n")
-            # print("-" * 50, end="\n\n")
-            # read_serializer = OrderDetailSerializer(queryset)
-            return Response(
-                {"errors": "Not providing order_id and product_id."}, status=400
-            )
+            queryset = OrderDetail.objects.all()
+            read_serializer = OrderDetailSerializer(queryset, many=True)
 
-        read_serializer = OrderDetailSerializer(queryset)
         return Response(read_serializer.data)
 
     def post(self, request):
         # Pass JSON data from user POST request to serializer for validation
+        # print("-" * 50, end="\n\n")
+        # print(request.data, end="\n\n")
+        # print("-" * 50, end="\n\n")
         create_serializer = OrderDetailSerializer(
             data=request.data,
         )
@@ -187,7 +204,8 @@ class RegisteredCustomerView(APIView):
         if customer_id:
             # If an id is provided in the GET request, retrieve the Todo item by that id
             try:
-                queryset = RegisteredCustomer.objects.get(customer_id=customer_id)
+                queryset = RegisteredCustomer.objects.get(
+                    customer_id=customer_id)
             except RegisteredCustomer.DoesNotExist:
                 return Response({"errors": "This user does not exist."}, status=400)
             read_serializer = RegisteredCustomerSerializer(queryset)
@@ -218,7 +236,8 @@ class RegisteredCustomerView(APIView):
         item = self._check_item(customer_id)
 
         # If the item does exists, use the serializer to validate the updated data
-        update_serializer = RegisteredCustomerSerializer(item, data=request.data)
+        update_serializer = RegisteredCustomerSerializer(
+            item, data=request.data)
 
         # If the data to update the item is valid, proceed to saving data to the database
         if update_serializer.is_valid():

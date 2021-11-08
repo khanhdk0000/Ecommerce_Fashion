@@ -68,7 +68,7 @@ export default {
     methods: {
         async removeFromCart(item) {
             this.cart.items = this.cart.items.filter(i => i.product.product_id !== item.product.product_id)
-
+            // ! Remove this product_id from the order_detail
         }
     },
     computed: {
