@@ -13,6 +13,7 @@ import LogIn from '../views/LogIn.vue'
 import MyAccount from '../views/MyAccount.vue'
 import Checkout from '../views/Checkout.vue'
 import Success from '../views/Success.vue'
+import Favorite from '../views/Favorite.vue'
 
 const routes = [
   {
@@ -65,6 +66,11 @@ const routes = [
     path: '/product/:id',
     name: 'Product',
     component: Product
+  },
+  {
+    path: '/wishlist',
+    name: 'Wishlist',
+    component: Favorite
   },
   // {
   //   path: '/category/:category_slug',

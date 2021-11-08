@@ -7,7 +7,8 @@ export default createStore({
     },
     isAuthenticated: false,
     token: '',
-    isLoading: false
+    isLoading: false,
+    user: null,
   },
   mutations: {
     initializeStore(state) {
@@ -53,6 +54,9 @@ export default createStore({
 
       localStorage.setItem('cart', JSON.stringify(state.cart))
     },
+    setUser(state, user){
+      state.user = user
+    }
   },
   actions: {
   },

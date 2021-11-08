@@ -80,7 +80,7 @@
             </div>
 
             <!-- Wishlist  -->
-            <router-link to="/cart" class="navbar-item">
+            <router-link to="/wishlist" class="navbar-item">
               <span class="icon mx-4">
                 <i class="far fa-heart"></i>
               </span>
@@ -179,7 +179,7 @@ export default {
       if (user)
         url = `https://avatars.dicebear.com/api/micah/${user.value.displayName}.svg`;
       else
-        url = 'https://avatars.dicebear.com/api/micah/1.svg'
+        url = 'https://avatars.dicebear.com/api/micah/2.svg'
       return url;
     });
 

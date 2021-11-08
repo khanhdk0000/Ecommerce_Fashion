@@ -1,5 +1,5 @@
 <template>
-  <div class="column is-4-tablet is-3-desktop">
+  <div class="column is-4-tablet is-3-desktop" v-if="isValid">
     <div class="card">
       <div class="card-image has-text-centered px-2">
         <figure class="image is-4by3 product-crop">
@@ -22,7 +22,7 @@
           >
         </p>
         <p class="card-footer-item" @click="addFavorite(product.product_id)">
-          Favorite
+          Delete
         </p>
       </footer>
     </div>
@@ -33,16 +33,18 @@
 import axios from "axios";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { toast } from "bulma-toast";
+import { ref } from "vue";
 
 export default {
-  name: "ProductBox",
+  name: "ProductBoxDelete",
   props: {
     product: Object,
   },
   setup() {
+    const isValid = ref(true);
     const addFavorite = (id) => {
-      console.log("add to favorite " + id);
-
+      console.log("Delete " + id);
+      isValid.value = false;
       const auth = getAuth();
       onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -50,7 +52,7 @@ export default {
 
           // Add to favorite list
           axios
-            .post(`/api/contains/${id}/${user.uid}`)
+            .delete(`/api/contains/${id}/${user.uid}`)
             .then((response) => {
               console.log(response);
             })
@@ -59,7 +61,7 @@ export default {
             });
 
           toast({
-            message: "Product added to favorite",
+            message: "Product removed from favorite",
             type: "is-primary",
             dismissible: true,
             pauseOnHover: true,
@@ -71,7 +73,7 @@ export default {
         }
       });
     };
-    return { addFavorite };
+    return { addFavorite, isValid };
   },
   mounted() {
     console.log(this.product.product_name);
