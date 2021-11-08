@@ -95,7 +95,8 @@ def search(request):
     try:
         products = Product.objects.filter(
             filter_name, filter_color, filter_gender, filter_cat, filter_subcat
-        )[:20]
+        )[:25]
+        print(type(products))
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
     except:

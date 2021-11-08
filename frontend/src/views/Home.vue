@@ -50,7 +50,7 @@ export default {
   mounted() {
     this.getLatestProducts();
 
-    document.title = "Home | Djackets";
+    document.title = "Home";
   },
   methods: {
     async getLatestProducts() {
