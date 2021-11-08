@@ -227,15 +227,18 @@ export default {
       else{
         // * Update the quantity and price of order's detail
         const new_content = {
-          'quantity': this.product.quantity + this.quantity,
-          'price': this.product.price * (this.product.quantity + this.quantity)
+          'quantity': this.order_detail.quantity + this.quantity,
+          'price': this.product.product_price * (this.order_detail.quantity + this.quantity)
         }
+        console.log(`Before updated order's detail:`);
+        console.log(this.order_detail)
 
         await axios
             .put(`api/checkout/cart/${this.order.order_id}/${this.product.product_id}/`, new_content)
             .then(response => {
               this.order_detail = response.data;
-              console.log(`Newly updated order's detail: ${this.order_detail}`);
+              console.log(`Newly updated order's detail:`);
+              console.log(this.order_detail)
             })
             .catch(error => {
               if (error.response){
@@ -267,7 +270,7 @@ export default {
           .get(`api/checkout/order/customer/${this.user_instance.customer_id}`)
           .then(response => {
             this.is_customer_order_exist=true;
-            this.order = response.data;
+            this.order = response.data[response.data.length-1];
             console.log(`Get order by customer's id:`);
             console.log(response.data);
           })
@@ -288,6 +291,7 @@ export default {
           .get(`api/checkout/cart/${this.order.order_id}/${this.product.product_id}`)
           .then(response => {
             this.is_order_detail_exist=true;
+            this.order_detail=response.data;
             console.log(`Get order's detail by order_id and product_id:`);
             console.log(response);
           })

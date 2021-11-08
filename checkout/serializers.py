@@ -15,9 +15,7 @@ class RegisteredCustomerSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return RegisteredCustomer.objects.create(
-            customer_id=validated_data.get("customer_id"),
-            name=validated_data.get("name"),
-            email=validated_data.get("email"),
+            **validated_data
         )
 
     def update(self, instance, validated_data):
@@ -46,9 +44,7 @@ class OrderSerializer(serializers.ModelSerializer):
         # print(dir(customer))
         # print("-" * 50, end="\n\n")
         customer_instance, _ = RegisteredCustomer.objects.get_or_create(
-            customer_id=customer.get('customer_id'),
-            name=customer.get('name'),
-            email=customer.get('email')
+            **customer
         )
 
         return Order.objects.create(
@@ -70,8 +66,8 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class OrderDetailSerializer(serializers.ModelSerializer):
-    order = OrderSerializer()
-    product = ProductSerializer()
+    order = OrderSerializer(required=False)
+    product = ProductSerializer(required=False)
     quantity = serializers.IntegerField(required=True)
     price = serializers.DecimalField(
         required=True, decimal_places=2, max_digits=10)
@@ -82,11 +78,11 @@ class OrderDetailSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         order = validated_data.get('order')
-        print("-" * 50, end="\n\n")
-        print(order, end="\n\n")
-        print(type(order))
-        print(dir(order))
-        print("-" * 50, end="\n\n")
+        # print("-" * 50, end="\n\n")
+        # print(order, end="\n\n")
+        # print(type(order))
+        # print(dir(order))
+        # print("-" * 50, end="\n\n")
         customer = order.get('customer')
         customer_instance, _ = RegisteredCustomer.objects.get_or_create(
             **customer
@@ -111,6 +107,9 @@ class OrderDetailSerializer(serializers.ModelSerializer):
         )
 
     def update(self, instance, validated_data):
+        print("-" * 50, end="\n\n")
+        print(validated_data, end="\n\n")
+        print("-" * 50, end="\n\n")
         instance.quantity = validated_data.get("quantity", instance.quantity)
         instance.price = validated_data.get("price", instance.price)
 

@@ -19,16 +19,16 @@ class OrderView(APIView):
             # If an id is provided in the GET request, retrieve the Todo item by that id
             try:
                 queryset = Order.objects.get(order_id=order_id)
+                read_serializer = OrderSerializer(queryset)
             except Order.DoesNotExist:
                 return Response({"errors": "This order does not exist."}, status=400)
-            read_serializer = OrderSerializer(queryset)
         elif customer_id and not order_id:
             try:
-                queryset = Order.objects.get(
+                queryset = Order.objects.filter(
                     customer_id=customer_id)
+                read_serializer = OrderSerializer(queryset, many=True)
             except Order.DoesNotExist:
                 return Response({"warnings": "This customer's order does not exist."}, status=303)
-            read_serializer = OrderSerializer(queryset)
         else:
             queryset = Order.objects.all()
             # print("-" * 50, end="\n\n")
