@@ -1,5 +1,5 @@
 <template>
-  <div class="page-product">
+  <div class="page-product section">
     <div class="columns is-multiline">
       <div class="column is-7">
         <figure class="image mb-6 mr-6 is-4by5">
@@ -26,8 +26,8 @@
       </div>
     </div>
     <!-- cards -->
-    <hr/>
-    <section class="section is-hidden-mobile">
+    <hr />
+    <!-- <section class="section is-hidden-mobile">
       <div class="container">
         <h3 class="title has-text-centered is-size-4">Related Products</h3>
         <div class="mt-5 columns is-centered is-8 is-variable features">
@@ -37,7 +37,7 @@
                 <figure class="image is-4by3 product-crop">
                   <img
                     class="product-crop"
-                    src="../assets/wristwatch-1149669.jpg"
+                    src="../assets/woman-2564660_1920.jpg"
                     alt="Placeholder image"
                   />
                 </figure>
@@ -59,7 +59,7 @@
                 <figure class="image is-4by3">
                   <img
                     class="product-crop"
-                    src="../assets/tie-690084.jpg"
+                    src="../assets/man-2425121_1920.jpg"
                     alt="Placeholder image"
                   />
                 </figure>
@@ -99,27 +99,42 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
+ <h3 class="title has-text-centered is-size-4">Related Products</h3>
+    <div class="product-center container">
+      <ProductBox2
+        v-for="product in latestProducts.slice(19, 23)"
+        v-bind:key="product.product_id"
+        v-bind:product="product"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import { toast } from "bulma-toast";
-import getUser from '../composables/getUser';
+import getUser from "../composables/getUser";
+import ProductBox2 from "../components/ProductBox2.vue";
 
 export default {
   name: "Product",
+
   data() {
     return {
       product: {},
       quantity: 1,
       order: {},
-      order_detail: {}
+      order_detail: {},
+      latestProducts: [],
     };
+  },
+  components: {
+    ProductBox2,
   },
   mounted() {
     this.getProduct();
+    this.getRelatedProducts();
   },
   methods: {
     async getProduct() {
@@ -143,12 +158,28 @@ export default {
 
       this.$store.commit("setIsLoading", false);
     },
+    async getRelatedProducts() {
+      this.$store.commit("setIsLoading", true);
+
+      await axios
+        .get("/api/product/search/")
+        .then((response) => {
+          this.latestProducts = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      // console.log(this.latestProducts[0].product_name);
+
+      this.$store.commit("setIsLoading", false);
+    },
     async addToCart() {
       if (isNaN(this.quantity) || this.quantity < 1) {
         this.quantity = 1;
       }
 
-      const {user} = getUser();
+      const { user } = getUser();
 
       // console.log(this.product);
       //* Config database field
@@ -157,8 +188,11 @@ export default {
       let required_date = new Date(); //? 3 day from ordered date
       required_date.setDate(required_date.getDate() + 3);
 
-      ordered_date = ordered_date.toISOString().slice(0, 19).replace('T', ' ');
-      required_date = required_date.toISOString().slice(0, 19).replace('T', ' ');
+      ordered_date = ordered_date.toISOString().slice(0, 19).replace("T", " ");
+      required_date = required_date
+        .toISOString()
+        .slice(0, 19)
+        .replace("T", " ");
 
       console.log(`ordered_date: ${ordered_date}`);
       console.log(`required_date: ${required_date}`);
@@ -169,15 +203,15 @@ export default {
       //* Put order to the db
       await axios
         .post("api/checkout/order/", {
-          "ordered_date":ordered_date,
-          "required_date":required_date,
-          "customer_id": user.value.uid,
+          ordered_date: ordered_date,
+          required_date: required_date,
+          customer_id: user.value.uid,
         })
-        .then(response => {
+        .then((response) => {
           this.order = response.data;
           // console.log(response.data);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
 
@@ -189,28 +223,32 @@ export default {
       // console.log(`quantity: ${this.quantity}`)
       await axios
         .post("api/checkout/cart/", {
-          "order_id": this.order.order_id,
-          "product_id": this.product.product_id,
-          "quantity": this.quantity,
-          "price": this.product.product_price,
+          order_id: this.order.order_id,
+          product_id: this.product.product_id,
+          quantity: this.quantity,
+          price: this.product.product_price,
         })
-        .then(response => {
+        .then((response) => {
           this.order_detail = response.data;
           console.log(response.data);
         })
-        .catch(error => {
-          if (error.response){
+        .catch((error) => {
+          if (error.response) {
             console.log(`Error response: ${JSON.stringify(error.response)}`);
-          }else if(error.request){
+          } else if (error.request) {
             console.log(`Error request: ${error.request}`);
-          }else if(error.message){
+          } else if (error.message) {
             console.log(`Error message: ${error.message}`);
           }
         });
 
       // * Commit to store and show message
 
-      this.$store.commit("addToCart", {product:this.product, quantity:this.quantity, order: this.order});
+      this.$store.commit("addToCart", {
+        product: this.product,
+        quantity: this.quantity,
+        order: this.order,
+      });
 
       toast({
         message: "The product was added to the cart",
@@ -226,6 +264,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.product-center {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+
 .product-image {
   max-height: 200px;
 }

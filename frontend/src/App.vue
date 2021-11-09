@@ -33,7 +33,7 @@
             <router-link
               v-bind:to="{
                 name: 'Search',
-                query: { gender: 'men'},
+                query: { gender: 'men' },
               }"
               class="navbar-item"
               >Men</router-link
@@ -97,7 +97,7 @@
               <div class="dropdown-trigger">
                 <div v-if="user">
                   <figure class="image is-24x24">
-                    <img :src="avatarUrl" v-if="renderAvatar"/>
+                    <img :src="avatarUrl" v-if="renderAvatar" />
                   </figure>
                 </div>
                 <div v-else>
@@ -143,13 +143,13 @@
       <div class="lds-dual-ring"></div>
     </div>
 
-    <section class="section">
-      <router-view />
-    </section>
-
+    <router-view />
+<!-- 
     <footer class="footer">
       <p class="has-text-centered">Copyright (c) 2021</p>
-    </footer>
+    </footer> -->
+
+    <CustomFooter/>
   </div>
 </template>
 
@@ -160,9 +160,10 @@ import useLogout from "./composables/useLogout";
 import { useRouter } from "vue-router";
 import { computed } from "vue";
 import MegaMenu from "./components/MegaMenu.vue";
+import CustomFooter from "./components/CustomFooter.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   setup() {
     const { user } = getUser();
     const { logout } = useLogout();
@@ -171,33 +172,33 @@ export default {
     const handleClick = async () => {
       await logout();
       console.log("logged out");
-      router.push('/log-in');
+      router.push("/log-in");
     };
 
     const avatarUrl = computed(() => {
-      let url = ''
+      let url = "";
       if (user)
         url = `https://avatars.dicebear.com/api/micah/${user.value.displayName}.svg`;
-      else
-        url = 'https://avatars.dicebear.com/api/micah/2.svg'
+      else url = "https://avatars.dicebear.com/api/micah/2.svg";
       return url;
     });
 
-    return { handleClick, user, avatarUrl};
+    return { handleClick, user, avatarUrl };
   },
   method: {
     forceRerender() {
       // Remove component from the DOM
-      this.renderAvatar=false;
+      this.renderAvatar = false;
 
       this.$nextTick(() => {
         // Add component back in
-        this.renderAvatar=true;
+        this.renderAvatar = true;
       });
-    }
+    },
   },
   components: {
     MegaMenu,
+    CustomFooter
   },
   data() {
     return {

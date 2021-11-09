@@ -1,5 +1,5 @@
 <template>
-  <div id="category">
+  <div id="category" class="container">
     <Breadcrumb />
     <div class="navbar section">
       <div
@@ -63,19 +63,29 @@
     <div class="main section">
       <div class="sidebar">
         <Accordion v-for="i in sidebar_content" :key="i">
-          <AccordionItem :trigger="i.trigger" :contents="i.content"/>
+          <AccordionItem :trigger="i.trigger" :contents="i.content" />
         </Accordion>
       </div>
 
       <div class="products">
-        <div class="products__grid">
+        <!-- <div class="products__grid">
           <ProductBox
             v-for="product in category.products"
             v-bind:key="product.id"
             v-bind:product="product"
             class=""
           />
+        </div> -->
+        <div class="product-center container">
+
+          <ProductBox2
+          v-for="product in category.products"
+          v-bind:key="product.id"
+          v-bind:product="product"
+          class=""
+        />
         </div>
+
 
         <nav
           class="pagination custom_pagination"
@@ -118,11 +128,13 @@ import ProductBox from "@/components/ProductBox";
 import Breadcrumb from "../components/Breadcrumb.vue";
 import Accordion from "../components/Accordion.vue";
 import AccordionItem from "../components/accordion-item.vue";
+import ProductBox2 from "../components/ProductBox2.vue";
 
 export default {
   name: "Category",
   components: {
     ProductBox,
+    ProductBox2,
     Breadcrumb,
     Accordion,
     AccordionItem,
@@ -157,14 +169,11 @@ export default {
   },
   watch: {
     $route(to, from) {
-
-        this.getCategory();
-
+      this.getCategory();
     },
   },
   methods: {
     async getCategory() {
-
       this.$store.commit("setIsLoading", true);
 
       console.log(this.$route.query);
@@ -203,6 +212,13 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+.product-center {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+
 .custom_pagination {
   background-color: white;
 }

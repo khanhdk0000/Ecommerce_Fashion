@@ -14,6 +14,7 @@ import MyAccount from '../views/MyAccount.vue'
 import Checkout from '../views/Checkout.vue'
 import Success from '../views/Success.vue'
 import Favorite from '../views/Favorite.vue'
+import Test from "../views/Test.vue";
 
 const routes = [
   {
@@ -72,6 +73,11 @@ const routes = [
     name: 'Wishlist',
     component: Favorite
   },
+  {
+    path: '/test',
+    name: 'Test',
+    component: Test
+  }
   // {
   //   path: '/category/:category_slug',
   //   name: 'Category',

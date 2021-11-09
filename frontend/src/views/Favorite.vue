@@ -1,14 +1,12 @@
 <template>
   <div>
-    <div class="products">
-      <div class="products__grid">
-        <ProductBoxDelete
-          v-for="product in products"
-          v-bind:key="product.id"
-          v-bind:product="product"
-          class=""
-        />
-      </div>
+    <div class="product-center container">
+      <ProductBoxDelete2
+        v-for="product in products"
+        v-bind:key="product.id"
+        v-bind:product="product"
+        class=""
+      />
     </div>
   </div>
 </template>
@@ -19,6 +17,7 @@ import { toast } from "bulma-toast";
 
 import ProductBox from "@/components/ProductBox";
 import ProductBoxDelete from "../components/ProductBoxDelete.vue";
+import ProductBoxDelete2 from "../components/ProductBoxDelete2.vue";
 import getUser from "../composables/getUser";
 import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
@@ -29,7 +28,8 @@ export default {
   name: "Favorite",
   components: {
     ProductBox,
-    ProductBoxDelete
+    ProductBoxDelete,
+    ProductBoxDelete2,
   },
   setup() {
     const products = ref("");
@@ -118,6 +118,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.product-center {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
 .products {
   box-sizing: border-box;
   flex: 1;
