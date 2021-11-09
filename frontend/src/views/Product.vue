@@ -180,7 +180,7 @@ export default {
       // * Check if the order is already exist by the customer
       await this.isExistOrder();
       if (!this.is_customer_order_exist){
-        console.log('Adding order')
+        console.log('Adding order');
         await axios
           .post("api/checkout/order/", {
             "ordered_date":ordered_date,
@@ -266,11 +266,13 @@ export default {
     },
 
     async isExistOrder(){
-      await axios
+      try {
+        await axios
           .get(`api/checkout/order/customer/${this.user_instance.customer_id}`)
           .then(response => {
-            this.is_customer_order_exist=true;
-            this.order = response.data[response.data.length-1];
+            this.order = response.data[response.data.length-1]; // Get the latest order of user
+            this.is_customer_order_exist=true?this.order:false; // In case no found result.
+
             console.log(`Get order by customer's id:`);
             console.log(response.data);
           })
@@ -284,10 +286,21 @@ export default {
               console.log(`Error message: ${error.message}`);
             }
           })
+      } catch (error) {
+        console.log(`Error Type: ${typeof(error)}`);
+        if (error.response){
+          console.log(`Error response: ${JSON.stringify(error.response)}`);
+        }else if(error.request){
+          console.log(`Error request: ${error.request}`);
+        }else if(error.message){
+          console.log(`Error message: ${error.message}`);
+        }
+      }
     },
 
     async isExistOrderDetail(){
-      await axios
+      try {
+        await axios
           .get(`api/checkout/cart/${this.order.order_id}/${this.product.product_id}`)
           .then(response => {
             this.is_order_detail_exist=true;
@@ -305,6 +318,16 @@ export default {
               console.log(`Error message: ${error.message}`);
             }
           })
+      } catch (error) {
+        console.log(`Error Type: ${typeof(error)}`);
+        if (error.response){
+          console.log(`Error response: ${JSON.stringify(error.response)}`);
+        }else if(error.request){
+          console.log(`Error request: ${error.request}`);
+        }else if(error.message){
+          console.log(`Error message: ${error.message}`);
+        }
+      }
     },
   },
 };
