@@ -46,6 +46,7 @@ import { useStore } from "vuex";
 import useLogin from "../composables/useLogin";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import loadItems from '../composables/loadItems';
 
 export default {
   setup() {
@@ -67,6 +68,10 @@ export default {
         };
         store.commit("setUser", userInfo);
         router.push({ name: "Home" });
+
+        // ? Crawl data from database
+        store.commit('clearCart');
+        store.state.cart.items = await loadItems(userInfo.customer_id);
       }
     };
 

@@ -287,7 +287,6 @@ export default {
 
       // * Commit to store and show message
       await this.getCartItems();
-      this.$store.commit('clearCart');
       this.$store.state.cart.items = this.current_items;
 
       toast({
@@ -377,6 +376,7 @@ export default {
           console.log(`Get order's detail by order_id and product_id:`);
           console.log(response);
           this.current_items = response.data;
+          this.current_items['order_id']=this.order.order_id;
         })
         .catch((error) => {
           if (error.response) {

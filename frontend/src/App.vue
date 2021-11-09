@@ -210,6 +210,7 @@ export default {
     };
   },
   beforeCreate() {
+    // ? Initialize store
     this.$store.commit("initializeStore");
 
     const token = this.$store.state.token;
@@ -219,6 +220,7 @@ export default {
     } else {
       axios.defaults.headers.common["Authorization"] = "";
     }
+
   },
   mounted() {
     this.cart = this.$store.state.cart;
