@@ -119,6 +119,7 @@ export default {
       order_detail: {},
       is_customer_order_exist: false,
       is_order_detail_exist: false,
+      current_items: []
     };
   },
   mounted() {
@@ -234,26 +235,27 @@ export default {
         console.log(this.order_detail)
 
         await axios
-            .put(`api/checkout/cart/${this.order.order_id}/${this.product.product_id}/`, new_content)
-            .then(response => {
-              this.order_detail = response.data;
-              console.log(`Newly updated order's detail:`);
-              console.log(this.order_detail)
-            })
-            .catch(error => {
-              if (error.response){
-                console.log(`Error response: ${JSON.stringify(error.response)}`);
-              }else if(error.request){
-                console.log(`Error request: ${error.request}`);
-              }else if(error.message){
-                console.log(`Error message: ${error.message}`);
-              }
-            });
+          .put(`api/checkout/cart/${this.order.order_id}/${this.product.product_id}/`, new_content)
+          .then(response => {
+            this.order_detail = response.data;
+            console.log(`Newly updated order's detail:`);
+            console.log(this.order_detail)
+          })
+          .catch(error => {
+            if (error.response){
+              console.log(`Error response: ${JSON.stringify(error.response)}`);
+            }else if(error.request){
+              console.log(`Error request: ${error.request}`);
+            }else if(error.message){
+              console.log(`Error message: ${error.message}`);
+            }
+          });
       }
 
       // * Commit to store and show message
-
-      this.$store.commit("addToCart", {product:this.product, quantity:this.quantity, order: this.order});
+      await this.getCartItems();
+      this.$store.commit('clearCart');
+      this.$store.state.cart.items = this.current_items;
 
       toast({
         message: "The product was added to the cart",
@@ -328,6 +330,31 @@ export default {
           console.log(`Error message: ${error.message}`);
         }
       }
+    },
+
+    async getCartItems() {
+      /*
+      * Retrieve items from database of the current user
+      */
+
+      // ? Get list of itmes in the latest order
+      await axios
+        .get(`api/checkout/cart/order/${this.order.order_id}`)
+        .then(response => {
+          console.log(`Get order's detail by order_id and product_id:`);
+          console.log(response);
+          this.current_items = response.data;
+        })
+        .catch(error => {
+          if (error.response){
+            console.log(`Error response: ${JSON.stringify(error.response)}`);
+          }else if(error.request){
+            console.log(`Error request: ${error.request}`);
+          }else if(error.message){
+            console.log(`Error message: ${error.message}`);
+          }
+        })
+
     },
   },
 };
