@@ -70,9 +70,29 @@ export default {
     methods: {
       async removeFromCart(item) {
         this.cart.items = this.cart.items.filter(i => i.product.product_id !== item.product.product_id)
-        // ! Remove this product_id from the order_detail
-      },
 
+        // ! Remove this product_id from the order_detail
+        console.log("Removing item:")
+        console.log(item)
+
+        const order_id = item.order.order_id;
+        const product_id = item.product.product_id;
+
+        await axios
+          .delete(`api/checkout/cart/${order_id}/${product_id}`)
+          .then(response => {
+            console.log(response.data + " Item has been deleted");
+          })
+          .catch(error => {
+            if (error.response){
+              console.log(`Error response: ${JSON.stringify(error.response)}`);
+            }else if(error.request){
+              console.log(`Error request: ${error.request}`);
+            }else if(error.message){
+              console.log(`Error message: ${error.message}`);
+            }
+          });
+      },
 
     },
     computed: {

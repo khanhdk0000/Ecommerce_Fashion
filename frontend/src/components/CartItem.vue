@@ -69,28 +69,8 @@ export default {
         }
       });
     },
-    async removeFromCart(item) {
-      this.$emit('removeFromCart', item)
-
-      //* Get order_id bind with this product_id
-      // await axios
-      //     .get(`api/checkout/cart/${item.product.product_id}`)
-      //     .then(response => {
-      //         console.log(response)
-      //     })
-      //     .catch(error => {
-      //         if (error.response){
-      //             console.log(`Error response: ${JSON.stringify(error.response)}`);
-      //         }else if(error.request){
-      //             console.log(`Error request: ${error.request}`);
-      //         }else if(error.message){
-      //             console.log(`Error message: ${error.message}`);
-      //         }
-      //     })
-      //* Remove the item from cart and any of its order_details
-
-
-      this.updateCart()
+    removeFromCart(item) {
+      this.$emit('removeFromCart', item);
     },
   },
 }
