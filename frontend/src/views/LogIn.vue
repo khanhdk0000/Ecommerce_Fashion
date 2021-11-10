@@ -69,9 +69,16 @@ export default {
         store.commit("setUser", userInfo);
         router.push({ name: "Home" });
 
+        // ? Setup tokens
+        const userToken = await user.getIdToken()
+        store.commit("setToken", userToken);
+        globalThis.localStorage.setItem('token', userToken);
+
         // ? Crawl data from database
         store.commit('clearCart');
         store.state.cart.items = await loadItems(userInfo.customer_id);
+
+        globalThis.localStorage.setItem('cart', JSON.stringify(store.state.cart))
       }
     };
 
