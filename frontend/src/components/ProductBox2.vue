@@ -108,7 +108,8 @@ h3 {
 .product {
   text-align: center;
   position: relative;
-  padding: 0 1rem;
+  padding: 0 3rem;
+  margin-top: 1rem;
 }
 
 .product-header {
