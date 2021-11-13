@@ -6,7 +6,7 @@
             </div>
 
             <div class="column is-12">
-                <button @click="logout()" class="button is-danger">Log out</button>
+                <button @click="handleClick" class="button is-danger">Log out</button>
             </div>
 
             <hr>
@@ -27,11 +27,25 @@
 import axios from 'axios'
 
 import OrderSummary from '@/components/OrderSummary.vue'
+import useLogout from '../composables/useLogout'
+import { useRouter } from 'vue-router'
 
 export default {
     name: 'MyAccount',
     components: {
         OrderSummary
+    },
+    setup() {
+        const {logout} = useLogout();
+        const router = useRouter();
+
+        const handleClick = async () => {
+            await logout();
+            console.log("logged out");
+            router.push('/log-in');
+        };
+
+        return {handleClick};
     },
     data() {
         return {
@@ -44,24 +58,14 @@ export default {
         this.getMyOrders()
     },
     methods: {
-        logout() {
-            axios.defaults.headers.common["Authorization"] = ""
-
-            localStorage.removeItem("token")
-            localStorage.removeItem("username")
-            localStorage.removeItem("userid")
-
-            this.$store.commit('removeToken')
-
-            this.$router.push('/')
-        },
         async getMyOrders() {
             this.$store.commit('setIsLoading', true)
 
             await axios
-                .get('/api/v1/orders/')
+                .get('/api/checkout/order/')
                 .then(response => {
-                    this.orders = response.data
+                    // this.orders = response.data
+                    console.log(response)
                 })
                 .catch(error => {
                     console.log(error)

@@ -1,6 +1,11 @@
+# backend file
+secret/
+envs
+
 # ignore server configuration
 *.azcli
-secret/
+.history
+.*
 
 # Logs
 logs
@@ -107,3 +112,27 @@ testem.log
 Thumbs.db
 
 #.vscode
+
+# Django stuff:
+*.log
+*.pot
+
+
+# Distribution / packaging
+bin/
+build/
+develop-eggs/
+dist/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
